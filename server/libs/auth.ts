@@ -11,7 +11,6 @@ const authConfig = {
     }),
   ],
   callbacks: {
-    trustHost: process.env.NODE_ENV === 'development',
     pages: {
       signIn: '/api/auth/signin',
     },

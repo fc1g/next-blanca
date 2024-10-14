@@ -11,14 +11,3 @@ export const prisma =
 if (process.env.NODE_ENV !== 'production') {
   globalForPrisma.prisma = prisma;
 }
-// async function connectPrisma() {
-
-//   try {
-//     await prisma.$connect();
-//     console.log('Connected to the database successfully');
-//   } catch (error) {
-//     console.error('Error connecting to the database:', error);
-//   }
-// }
-
-// connectPrisma();
