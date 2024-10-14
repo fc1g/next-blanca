@@ -21,7 +21,7 @@ export default function ContactsCalendar({ data }: { data: BookedDate[] }) {
   }));
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center py-8">
       <Calendar
         className="rounded-xl border"
         locale={locales[localeActive]}

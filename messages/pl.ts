@@ -97,6 +97,16 @@ export default JSON.parse(`{
     }
   },
   "contacts": {
+    "monthPriceTitle": "Cena miesięczna (miesięcznie)",
+    "months": {
+      "october": "Październik",
+      "november": "Listopad",
+      "christmasNewYear": "Święta Bożego Narodzenia i Nowy Rok (2 tygodnie)",
+      "march": "Marzec",
+      "april": "Kwiecień"
+    },
+    "fullPrice": "pełna cena",
+    "deposit": "Zadatek: Zwracany po pobycie, 300 euro.",
     "information": {
       "title": "Procedura rezerwacji",
       "subtitle": "Jak dokonać rezerwacji: Przewodnik krok po kroku",
@@ -179,5 +189,4 @@ export default JSON.parse(`{
     "reset": "Reset",
     "empty": "Ta lista jest pusta"
   }
-}
-`) as Translation;
+}`) as Translation;

@@ -1,7 +1,6 @@
 import { Translation } from '@/server/types/Translation';
 
-export default JSON.parse(`
-  {
+export default JSON.parse(`{
   "header": {
     "nav": {
       "home": "Home",
@@ -98,6 +97,16 @@ export default JSON.parse(`
     }
   },
   "contacts": {
+    "monthPriceTitle": "Month price (monthly)",
+    "months": {
+      "october": "October",
+      "november": "November",
+      "christmasNewYear": "Christmas and New Year (2 weeks)",
+      "march": "March",
+      "april": "April"
+    },
+    "fullPrice": "full price",
+    "deposit": "Deposit: Refundable after the stay, 300 euros.",
     "information": {
       "title": "Booking Procedure",
       "subtitle": "How to Book Your Reservation: Step-by-Step Guide",

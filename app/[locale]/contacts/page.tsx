@@ -20,8 +20,49 @@ export default function ContactsPage({ params: { locale } }: Params) {
       <Header logoStyles="text-secondary-foreground" className="" />
 
       <main className="flex-auto">
-        <section className="my-12 grid space-y-8 sm:space-y-12 md:grid-cols-2 md:space-y-0 lg:my-24">
-          <ContactsChart />
+        <section className="my-12 grid space-y-8 sm:space-y-12 md:my-24 md:grid-cols-2 lg:space-y-0">
+          <div>
+            <ContactsChart />
+
+            <section className="mt-2 flex flex-col px-2 lg:mt-12 lg:px-6">
+              <ul className="grid items-center space-y-2 text-muted-foreground lg:-mt-8 lg:grid-cols-2">
+                <li>
+                  <span className="font-semibold text-secondary-foreground">
+                    {t('contacts.months.october')}:
+                  </span>{' '}
+                  2500 euro — {t('contacts.fullPrice')}
+                </li>
+                <li>
+                  <span className="font-semibold text-secondary-foreground">
+                    {t('contacts.months.november')}:
+                  </span>{' '}
+                  2300 euro — {t('contacts.fullPrice')}
+                </li>
+                <li>
+                  <span className="font-semibold text-secondary-foreground">
+                    {t('contacts.months.christmasNewYear')}:
+                  </span>{' '}
+                  2500 euro — {t('contacts.fullPrice')}
+                </li>
+                <li>
+                  <span className="font-semibold text-secondary-foreground">
+                    {t('contacts.months.march')}:
+                  </span>{' '}
+                  2200 euro — {t('contacts.fullPrice')}
+                </li>
+                <li>
+                  <span className="col-span-2 font-semibold text-secondary-foreground">
+                    {t('contacts.months.april')}:
+                  </span>{' '}
+                  2500 euro — {t('contacts.fullPrice')}
+                </li>
+              </ul>
+
+              <p className="mt-4 font-semibold text-primary">
+                {t('contacts.deposit')}
+              </p>
+            </section>
+          </div>
 
           <Suspense fallback={<CalendarSkeleton />}>
             <WrappedContactsCalendar />

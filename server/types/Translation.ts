@@ -108,6 +108,16 @@ export type Accordion = {
 };
 
 export type Contacts = {
+  monthPriceTitle: string;
+  months: {
+    october: string;
+    november: string;
+    christmasNewYear: string;
+    march: string;
+    april: string;
+  };
+  fullPrice: string;
+  deposit: string;
   information: ContactsInformation;
   accordion: Accordion;
 };
@@ -177,7 +187,6 @@ export type ErrorMessages = {
   empty: string;
 };
 
-// Основний тип Translation
 export type Translation = {
   header: Header;
   homepage: Homepage;

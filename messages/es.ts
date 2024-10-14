@@ -97,6 +97,16 @@ export default JSON.parse(`{
     }
   },
   "contacts": {
+    "monthPriceTitle": "Precio mensual (mensual)",
+    "months": {
+      "october": "Octubre",
+      "november": "Noviembre",
+      "christmasNewYear": "Navidad y Año Nuevo (2 semanas)",
+      "march": "Marzo",
+      "april": "Abril"
+    },
+    "fullPrice": "precio completo",
+    "deposit": "Depósito: Reembolsable después de la estancia, 300 euros.",
     "information": {
       "title": "Procedimiento de reserva",
       "subtitle": "Cómo hacer su reserva: Guía paso a paso",
@@ -179,5 +189,4 @@ export default JSON.parse(`{
     "reset": "Restablecer",
     "empty": "Esta lista está vacía"
   }
-}
-`) as Translation;
+}`) as Translation;
