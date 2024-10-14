@@ -1,0 +1,75 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model BookedDate {
+  id            String @id @default(auto()) @map("_id") @db.ObjectId
+  initialDate   String
+  deadlineDate  String
+}
+
+model SurroundingPlace {
+  id              String    @id @default(auto()) @map("_id") @db.ObjectId
+  image           Bytes
+  routeLink       String
+  distance        Float     
+
+  title           Title     @relation(fields: [titleId], references: [id])
+  titleId         String    @db.ObjectId
+
+  subtitle        Subtitle      @relation(fields: [subtitleId], references: [id])
+  subtitleId      String    @db.ObjectId
+
+  description     Description   @relation(fields: [descriptionId], references: [id])
+  descriptionId   String    @db.ObjectId
+
+  imageAltText    ImageAltText  @relation(fields: [imageAltTextId], references: [id])
+  imageAltTextId  String    @db.ObjectId
+
+  coords          Coords    @relation(fields: [coordsId], references: [id])
+  coordsId         String    @db.ObjectId
+}
+
+model Title {
+  id                  String    @id @default(auto()) @map("_id") @db.ObjectId
+  en                  String
+  pl                  String
+  es                  String
+  surroundingPlaces   SurroundingPlace[]
+}
+
+model Subtitle {
+  id                  String    @id @default(auto()) @map("_id") @db.ObjectId
+  en                  String
+  pl                  String
+  es                  String
+  surroundingPlaces   SurroundingPlace[]
+}
+
+model Description {
+  id                  String    @id @default(auto()) @map("_id") @db.ObjectId
+  en                  String
+  pl                  String
+  es                  String
+  surroundingPlaces   SurroundingPlace[]
+}
+
+model ImageAltText {
+  id                  String    @id @default(auto()) @map("_id") @db.ObjectId
+  en                  String
+  pl                  String
+  es                  String
+  surroundingPlaces   SurroundingPlace[]
+}
+
+model Coords {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  lat  Float
+  lng Float
+  surroundingPlaces   SurroundingPlace[]
+}
