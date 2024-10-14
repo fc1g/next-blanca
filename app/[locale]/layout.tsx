@@ -8,8 +8,10 @@ import { Params } from '@/client/types/Params';
 
 export const metadata: Metadata = {
   title: 'CasaBlanca',
-  description: '',
-  keywords: '',
+  description:
+    'Rent a house with a private pool in San Pedro del Pinatar, Spain. Enjoy comfort, modern amenities, and beautiful beaches in one of the most attractive resorts. Book your vacation today!',
+  keywords:
+    '#heatedpool,Heated pool,Big house,luxury villa,luxury house,holidays,holidays in Spain,private pool,private pool heated,private house,vacation,rest,rent houses in Spain',
 };
 
 export function generateStaticParams() {
@@ -25,12 +27,8 @@ export default function RootLayout({
   unstable_setRequestLocale(locale);
 
   return (
-    <html
-      className="h-full scroll-smooth"
-      lang={locale}
-      suppressHydrationWarning
-    >
-      <body className="h-full scroll-smooth">
+    <html className="h-full" lang={locale} suppressHydrationWarning>
+      <body className="h-full">
         <Providers>
           {children}
 

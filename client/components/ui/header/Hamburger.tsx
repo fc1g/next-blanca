@@ -1,5 +1,7 @@
 import { useTranslations } from 'next-intl';
 
+import '@/client/styles/hamburger.css';
+
 type HamburgerProps = {
   isOpen: boolean;
   setIsOpen: () => void;

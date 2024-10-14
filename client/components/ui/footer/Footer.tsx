@@ -17,9 +17,11 @@ export default function Footer() {
           <>
             <SocialList.SocialItem href="https://www.facebook.com/people/CasaBlanca-Private-Heated-Pool/100091592920461/">
               <FaFacebook className="text-lg text-muted-foreground transition duration-300 hover:-translate-y-1 hover:text-secondary-foreground sm:text-xl" />
+              <span className="sr-only">Facebook</span>
             </SocialList.SocialItem>
             <SocialList.SocialItem href="https://www.instagram.com/casablanca_privateheatedpool?igsh=d2F5ZjJhOTJwdXBn">
               <FaInstagram className="text-lg text-muted-foreground transition duration-300 hover:-translate-y-1 hover:text-secondary-foreground sm:text-xl" />
+              <span className="sr-only">Instagram</span>
             </SocialList.SocialItem>
           </>
         </SocialList>

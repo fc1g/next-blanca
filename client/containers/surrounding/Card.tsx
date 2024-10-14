@@ -40,7 +40,6 @@ export default function PlaceCard({
             alt={imageAltText[activeLocale]}
             fill
             sizes="25vw"
-            className="object-cover"
           />
         </div>
       </CardContent>

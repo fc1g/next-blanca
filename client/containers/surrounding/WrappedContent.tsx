@@ -1,15 +1,17 @@
 import { fetchMany } from '@/server/actions/surrounding/fetchMany';
-import PlaceCard from './Card';
-import { unstable_noStore } from 'next/cache';
-import CustomePagination from './CustomePagination';
 import { getTranslations } from 'next-intl/server';
+import dynamic from 'next/dynamic';
+
+const PlaceCard = dynamic(() => import('./Card'), { ssr: false });
+const CustomePagination = dynamic(() => import('./CustomePagination'), {
+  ssr: false,
+});
 
 export default async function WrappedContent({
   searchParams,
 }: {
   searchParams: URLSearchParams;
 }) {
-  unstable_noStore();
   const { places, totalResults } = await fetchMany(searchParams);
   const t = await getTranslations();
 

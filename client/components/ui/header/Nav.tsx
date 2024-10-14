@@ -23,6 +23,7 @@ export default function Nav({ className, setIsOpen, children }: NavProps) {
           >
             {t(link.label)}
           </Link>
+          <span className="sr-only">{t(link.label)}</span>
         </li>
       ))}
 
