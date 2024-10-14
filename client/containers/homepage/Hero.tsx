@@ -29,7 +29,7 @@ export default function Hero() {
       />
 
       <div className="relative z-20 flex flex-col justify-center px-3 sm:px-6">
-        <h1 className="max-w-52 text-lg xs:max-w-64 xs:text-2xl sm:max-w-80 sm:text-3xl md:max-w-xl md:text-5xl lg:max-w-2xl lg:text-6xl xl:max-w-3xl xl:text-7xl">
+        <h1 className="max-w-52 text-lg text-white xs:max-w-64 xs:text-2xl sm:max-w-80 sm:text-3xl md:max-w-xl md:text-5xl lg:max-w-2xl lg:text-6xl xl:max-w-3xl xl:text-7xl">
           {t('homepage.hero.title.firstPart')}{' '}
           <span className="text-[#85cbff]">
             {t('homepage.hero.title.vacation')}
