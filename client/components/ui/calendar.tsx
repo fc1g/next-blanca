@@ -45,7 +45,7 @@ function Calendar({
         ),
         day: cn(
           buttonVariants({ variant: 'ghost' }),
-          'sm:h-12 sm:w-12 md:h-4 lg:h-12 md:w-4 lg:w-12 p-2 md:p-4 lg:p-6 xl:p-8 font-normal aria-selected:opacity-100'
+          'sm:h-12 h-8 w-8 sm:w-12 md:h-4 lg:h-12 md:w-4 lg:w-12 p-2 md:p-4 lg:p-6 xl:p-8 font-normal aria-selected:opacity-100'
         ),
         day_range_start: 'day-range-start',
         day_range_end: 'day-range-end',
