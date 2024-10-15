@@ -1,6 +1,7 @@
 'use server';
 
 import { prisma } from '@/server/db/prisma-client';
+import { revalidatePath } from 'next/cache';
 
 type PrismaError = {
   code?: string;
@@ -15,7 +16,7 @@ export const deleteOne = async (id: string) => {
     });
 
     console.log(`Successfully deleted booked date with ID: ${id}`);
-    return;
+    revalidatePath('/admin/contacts');
   } catch (err) {
     console.error(`Error deleting booked date with ID: ${id}`, err);
 

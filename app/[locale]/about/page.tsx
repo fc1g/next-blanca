@@ -10,7 +10,7 @@ export default function AboutPage({ params: { locale } }: Params) {
     <>
       <Header
         className="absolute inset-x-0 top-0 z-[999]"
-        logoStyles="pointer-events-none select-none text-transparent"
+        logoStyles="invisible"
       />
 
       <main className="flex-auto">

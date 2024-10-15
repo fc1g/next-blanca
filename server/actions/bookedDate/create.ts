@@ -25,5 +25,5 @@ export const create = async (formData: FormData) => {
     throw new Error('Failed to create bookedDate');
   }
 
-  redirect('/admin/calendar');
+  redirect('/admin/contacts');
 };

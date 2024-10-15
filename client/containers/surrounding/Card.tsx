@@ -35,7 +35,7 @@ export default function PlaceCard({
       <CardContent>
         <div className="relative h-48">
           <Image
-            priority
+            loading="lazy"
             src={image}
             alt={imageAltText[activeLocale]}
             fill

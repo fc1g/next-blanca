@@ -3,9 +3,12 @@ import { getTranslations } from 'next-intl/server';
 import dynamic from 'next/dynamic';
 
 const PlaceCard = dynamic(() => import('./Card'), { ssr: false });
-const CustomePagination = dynamic(() => import('./CustomePagination'), {
-  ssr: false,
-});
+const CustomePagination = dynamic(
+  () => import('../../components/CustomePagination'),
+  {
+    ssr: false,
+  }
+);
 
 export default async function WrappedContent({
   searchParams,

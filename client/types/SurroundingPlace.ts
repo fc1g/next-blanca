@@ -23,7 +23,6 @@ export type SurroundingTitle = {
     en: string;
     pl: string;
     es: string;
-    id: string;
   };
 };
 
@@ -32,7 +31,6 @@ export type SurroundingSubtitle = {
     en: string;
     pl: string;
     es: string;
-    id: string;
   };
 };
 
@@ -41,7 +39,6 @@ export type SurroundingDescription = {
     en: string;
     pl: string;
     es: string;
-    id: string;
   };
 };
 
@@ -50,7 +47,6 @@ export type SurroundingImageAltText = {
     en: string;
     pl: string;
     es: string;
-    id: string;
   };
 };
 
@@ -68,7 +64,6 @@ export type SurroundingDistance = {
 
 export type SurroundingCoords = {
   coords: {
-    id: string;
     lat: number;
     lng: number;
   };

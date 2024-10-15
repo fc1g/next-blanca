@@ -27,5 +27,5 @@ export const update = async (id: string, formData: FormData) => {
     console.error('Failed to update booked date:', err);
     throw new Error('An error occurred while updating the booked date.');
   }
-  redirect('/admin/calendar');
+  redirect('/admin/contacts');
 };

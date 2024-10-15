@@ -9,23 +9,60 @@ export const fetchOne = async (id: string) => {
       where: {
         id,
       },
-      select: {
-        id: true,
-        title: true,
-        subtitle: true,
-        description: true,
-        imageAltText: true,
-        image: true,
-        distance: true,
-        coords: true,
-        routeLink: true,
+      include: {
+        title: {
+          select: {
+            en: true,
+            pl: true,
+            es: true,
+          },
+        },
+        subtitle: {
+          select: {
+            en: true,
+            pl: true,
+            es: true,
+          },
+        },
+        description: {
+          select: {
+            en: true,
+            pl: true,
+            es: true,
+          },
+        },
+        imageAltText: {
+          select: {
+            en: true,
+            pl: true,
+            es: true,
+          },
+        },
+        coords: {
+          select: {
+            lat: true,
+            lng: true,
+          },
+        },
       },
     });
 
     if (!surroundingPlace)
       throw new Error(`Failed to fetch a place with id: ${id}`);
 
-    return { ...surroundingPlace, image: convertImage(surroundingPlace.image) };
+    const place = {
+      id: surroundingPlace.id,
+      subtitle: surroundingPlace.subtitle,
+      title: surroundingPlace.title,
+      description: surroundingPlace.description,
+      imageAltText: surroundingPlace.imageAltText,
+      image: convertImage(surroundingPlace.image),
+      distance: surroundingPlace.distance,
+      routeLink: surroundingPlace.routeLink,
+      coords: surroundingPlace.coords,
+    };
+
+    return place;
   } catch (err) {
     console.error(err);
     throw new Error('Failed to fetch place');

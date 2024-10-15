@@ -3,7 +3,6 @@
 import { ICON_COORDS, ICON_SIZE } from '@/client/utils';
 import { Icon } from 'leaflet';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
-import '@/client/styles/leafMap.css';
 
 import houseMarker from '@/public/icons/home.webp';
 import placeMarker from '@/public/icons/place.webp';
