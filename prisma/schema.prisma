@@ -14,24 +14,24 @@ model BookedDate {
 }
 
 model SurroundingPlace {
-  id              String    @id @default(auto()) @map("_id") @db.ObjectId
-  image           Bytes
-  routeLink       String
-  distance        Float     
+  id                String    @id @default(auto()) @map("_id") @db.ObjectId
+  image             Bytes
+  routeLink         String
+  distance          Float     
 
-  title           Title     @relation(fields: [titleId], references: [id])
-  titleId         String    @db.ObjectId
+  title             Title     @relation(fields: [titleId], references: [id])
+  titleId          String    @db.ObjectId
 
-  subtitle        Subtitle      @relation(fields: [subtitleId], references: [id])
-  subtitleId      String    @db.ObjectId
+  subtitle          Subtitle      @relation(fields: [subtitleId], references: [id])
+  subtitleId       String    @db.ObjectId
 
-  description     Description   @relation(fields: [descriptionId], references: [id])
-  descriptionId   String    @db.ObjectId
+  description       Description   @relation(fields: [descriptionId], references: [id])
+  descriptionId    String    @db.ObjectId
 
-  imageAltText    ImageAltText  @relation(fields: [imageAltTextId], references: [id])
-  imageAltTextId  String    @db.ObjectId
+  imageAltText      ImageAltText  @relation(fields: [imageAltTextId], references: [id])
+  imageAltTextId   String    @db.ObjectId
 
-  coords          Coords    @relation(fields: [coordsId], references: [id])
+  coords            Coords    @relation(fields: [coordsId], references: [id])
   coordsId         String    @db.ObjectId
 }
 

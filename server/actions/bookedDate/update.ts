@@ -3,6 +3,7 @@
 import { redirect } from '@/server/libs/i18n/routing';
 import { prisma } from '@/server/db/prisma-client';
 import { bookedDateSchema } from '@/server/models/BookedDate';
+import { ZodError } from 'zod';
 
 export const update = async (id: string, formData: FormData) => {
   try {
@@ -24,8 +25,19 @@ export const update = async (id: string, formData: FormData) => {
       },
     });
   } catch (err) {
-    console.error('Failed to update booked date:', err);
-    throw new Error('An error occurred while updating the booked date.');
+    let errorMessage = 'Failed to update bookedDate';
+    let details = '';
+    let statusCode = 500;
+
+    if (err instanceof ZodError) {
+      errorMessage = 'Validation failed. Please provide valid data';
+      details = err.errors.map(e => e.message).join(', ');
+      statusCode = 400;
+    }
+
+    throw new Error(
+      JSON.stringify({ message: errorMessage, details, statusCode })
+    );
   }
   redirect('/admin/contacts');
 };

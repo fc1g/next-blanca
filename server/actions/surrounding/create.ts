@@ -10,7 +10,13 @@ export const create = async (formData: FormData) => {
     const imageFile = formData.get('image');
 
     if (!imageFile || !(imageFile instanceof File)) {
-      throw new Error('Image file is required and must be a valid file.');
+      throw new Error(
+        JSON.stringify({
+          message: 'Failed to create surroundingPlace',
+          details: 'Image file is required and must be a valid file',
+          statusCode: 400,
+        })
+      );
     }
 
     const buffer = await imageFile.arrayBuffer();
@@ -94,13 +100,19 @@ export const create = async (formData: FormData) => {
       },
     });
   } catch (err) {
+    let errorMessage = 'Failed to create bookedDate';
+    let details = '';
+    let statusCode = 500;
+
     if (err instanceof ZodError) {
-      console.error('Validation Error:', err.errors);
-      throw new Error('Validation failed. Please provide valid data');
+      errorMessage = 'Validation failed. Please provide valid data';
+      details = err.errors.map(e => e.message).join(', ');
+      statusCode = 400;
     }
 
-    console.error('Database Error:', err);
-    throw new Error('Failed to create surroundingPlace');
+    throw new Error(
+      JSON.stringify({ message: errorMessage, details, statusCode })
+    );
   }
   redirect('/admin/surrounding');
 };

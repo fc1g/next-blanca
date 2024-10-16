@@ -2,20 +2,21 @@
 
 import { redirect } from '@/server/libs/i18n/routing';
 import { prisma } from '@/server/db/prisma-client';
-import { surroundingPlaceSchema } from '@/server/models/SurroundingPlace';
+import {
+  imageSchema,
+  surroundingPlaceSchemaWithoutImage,
+} from '@/server/models/SurroundingPlace';
+import { ZodError } from 'zod';
+
+type DataLng = {
+  en: string;
+  pl: string;
+  es: string;
+};
 
 export const update = async (id: string, formData: FormData) => {
   try {
-    const imageFile = formData.get('image');
-
-    if (!imageFile || !(imageFile instanceof File)) {
-      throw new Error('Image file is required and must be a valid file.');
-    }
-
-    const buffer = await imageFile.arrayBuffer();
-    const imageBuffer = Buffer.from(buffer);
-
-    const parsedData = surroundingPlaceSchema.parse({
+    const parsedData = surroundingPlaceSchemaWithoutImage.parse({
       title: {
         en: formData.get('titleEn') as string,
         pl: formData.get('titlePl') as string,
@@ -31,7 +32,6 @@ export const update = async (id: string, formData: FormData) => {
         pl: formData.get('descriptionPl') as string,
         es: formData.get('descriptionEs') as string,
       },
-      image: imageBuffer,
       imageAltText: {
         en: formData.get('imageAltTextEn') as string,
         pl: formData.get('imageAltTextPl') as string,
@@ -44,11 +44,14 @@ export const update = async (id: string, formData: FormData) => {
 
     const existingPlace = await prisma.surroundingPlace.findUnique({
       where: { id },
-      include: {
+      select: {
         title: true,
         subtitle: true,
         description: true,
+        image: true,
         imageAltText: true,
+        routeLink: true,
+        distance: true,
         coords: true,
       },
     });
@@ -57,98 +60,122 @@ export const update = async (id: string, formData: FormData) => {
       throw new Error(`Surrounding place with id ${id} not found.`);
     }
 
+    const hasChanged = (
+      key: keyof typeof parsedData,
+      existingValue: DataLng
+    ) => {
+      return JSON.stringify(parsedData[key]) !== JSON.stringify(existingValue);
+    };
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const updates: any = {};
+    const updatePromises: Promise<any>[] = [];
 
-    if (
-      parsedData.title.en !== existingPlace.title.en ||
-      parsedData.title.pl !== existingPlace.title.pl ||
-      parsedData.title.es !== existingPlace.title.es
-    ) {
-      updates.title = {
-        update: {
-          en: parsedData.title.en,
-          pl: parsedData.title.pl,
-          es: parsedData.title.es,
-        },
-      };
+    const imageFile = formData.get('image') as File | null;
+
+    if (imageFile && imageFile.size > 0) {
+      const buffer = await imageFile.arrayBuffer();
+      const imageBuffer = Buffer.from(buffer);
+      imageSchema.parse(imageBuffer);
+      updatePromises.push(
+        prisma.surroundingPlace.update({
+          where: {
+            id,
+          },
+          data: {
+            image: imageBuffer,
+          },
+        })
+      );
     }
 
-    if (
-      parsedData.subtitle.en !== existingPlace.subtitle.en ||
-      parsedData.subtitle.pl !== existingPlace.subtitle.pl ||
-      parsedData.subtitle.es !== existingPlace.subtitle.es
-    ) {
-      updates.subtitle = {
-        update: {
-          en: parsedData.subtitle.en,
-          pl: parsedData.subtitle.pl,
-          es: parsedData.subtitle.es,
-        },
-      };
+    if (hasChanged('title', existingPlace.title)) {
+      updatePromises.push(
+        prisma.surroundingPlace.update({
+          where: { id },
+          data: { title: { update: parsedData.title } },
+        })
+      );
     }
 
-    if (
-      parsedData.description.en !== existingPlace.description.en ||
-      parsedData.description.pl !== existingPlace.description.pl ||
-      parsedData.description.es !== existingPlace.description.es
-    ) {
-      updates.description = {
-        update: {
-          en: parsedData.description.en,
-          pl: parsedData.description.pl,
-          es: parsedData.description.es,
-        },
-      };
+    if (hasChanged('subtitle', existingPlace.subtitle)) {
+      updatePromises.push(
+        prisma.surroundingPlace.update({
+          where: { id },
+          data: { subtitle: { update: parsedData.subtitle } },
+        })
+      );
     }
 
-    if (
-      parsedData.imageAltText.en !== existingPlace.imageAltText.en ||
-      parsedData.imageAltText.pl !== existingPlace.imageAltText.pl ||
-      parsedData.imageAltText.es !== existingPlace.imageAltText.es
-    ) {
-      updates.imageAltText = {
-        update: {
-          en: parsedData.imageAltText.en,
-          pl: parsedData.imageAltText.pl,
-          es: parsedData.imageAltText.es,
-        },
-      };
+    if (hasChanged('description', existingPlace.description)) {
+      updatePromises.push(
+        prisma.surroundingPlace.update({
+          where: { id },
+          data: { description: { update: parsedData.description } },
+        })
+      );
+    }
+
+    if (hasChanged('imageAltText', existingPlace.imageAltText)) {
+      updatePromises.push(
+        prisma.surroundingPlace.update({
+          where: { id },
+          data: { imageAltText: { update: parsedData.imageAltText } },
+        })
+      );
     }
 
     if (
       parsedData.coords[0] !== existingPlace.coords.lat ||
       parsedData.coords[1] !== existingPlace.coords.lng
     ) {
-      updates.coords = {
-        update: {
-          lat: parsedData.coords[0],
-          lng: parsedData.coords[1],
-        },
-      };
-    }
-
-    if (parsedData.image !== existingPlace.image) {
-      updates.image = parsedData.image;
+      updatePromises.push(
+        prisma.surroundingPlace.update({
+          where: { id },
+          data: {
+            coords: {
+              update: { lat: parsedData.coords[0], lng: parsedData.coords[1] },
+            },
+          },
+        })
+      );
     }
 
     if (parsedData.routeLink !== existingPlace.routeLink) {
-      updates.routeLink = parsedData.routeLink;
+      updatePromises.push(
+        prisma.surroundingPlace.update({
+          where: { id },
+          data: { routeLink: parsedData.routeLink },
+        })
+      );
     }
 
     if (parsedData.distance !== existingPlace.distance) {
-      updates.distance = parsedData.distance;
+      updatePromises.push(
+        prisma.surroundingPlace.update({
+          where: { id },
+          data: { distance: parsedData.distance },
+        })
+      );
     }
 
-    await prisma.surroundingPlace.update({
-      where: { id },
-      data: {
-        ...updates,
-      },
-    });
+    // Виконання всіх оновлень паралельно
+    if (updatePromises.length > 0) {
+      await Promise.all(updatePromises);
+    }
   } catch (err) {
-    console.error('Failed to update surrounding place:', err);
-    throw new Error('An error occurred while updating the surrounding place.');
+    let errorMessage = 'Failed to update surroundingPlace';
+    let details = '';
+    let statusCode = 500;
+
+    if (err instanceof ZodError) {
+      errorMessage = 'Validation failed. Please provide valid data';
+      details = err.errors.map(e => e.message).join(', ');
+      statusCode = 400;
+    }
+
+    throw new Error(
+      JSON.stringify({ message: errorMessage, details, statusCode })
+    );
   }
   redirect('/admin/surrounding');
 };

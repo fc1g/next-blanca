@@ -1,7 +1,6 @@
 'use server';
 
 import { convertImage } from '@/server/services/convertImageToString';
-import { SurroundingPlaces } from '@/client/types/SurroundingPlace';
 import { prisma } from '@/server/db/prisma-client';
 
 export const fetchMany = async (searchParams?: URLSearchParams) => {
@@ -21,10 +20,10 @@ export const fetchMany = async (searchParams?: URLSearchParams) => {
       prisma.surroundingPlace.findMany({
         select: {
           id: true,
+          image: true,
           title: true,
           subtitle: true,
           imageAltText: true,
-          image: true,
         },
         skip,
         take,
@@ -40,7 +39,7 @@ export const fetchMany = async (searchParams?: URLSearchParams) => {
     const places = surroundingPlaces.map(place => ({
       ...place,
       image: convertImage(place.image),
-    })) as SurroundingPlaces[];
+    }));
 
     return { places, totalResults };
   } catch (err) {

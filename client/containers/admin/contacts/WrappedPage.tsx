@@ -39,8 +39,6 @@ export default function WrappedPage({ data, results, t }: WrappedPageProps) {
     }
   );
 
-  console.log(optimisticBookedDates);
-
   async function deleteHandler(id: string) {
     startTransition(() => {
       optimisticDelete(id);

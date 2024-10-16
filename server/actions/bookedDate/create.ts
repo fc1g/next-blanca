@@ -16,13 +16,19 @@ export const create = async (formData: FormData) => {
       data: parsedData,
     });
   } catch (err) {
+    let errorMessage = 'Failed to create bookedDate';
+    let details = '';
+    let statusCode = 500;
+
     if (err instanceof ZodError) {
-      console.error('Validation Error:', err.errors);
-      throw new Error('Validation failed. Please provide valid data');
+      errorMessage = 'Validation failed. Please provide valid data';
+      details = err.errors.map(e => e.message).join(', ');
+      statusCode = 400;
     }
 
-    console.error('Database Error:', err);
-    throw new Error('Failed to create bookedDate');
+    throw new Error(
+      JSON.stringify({ message: errorMessage, details, statusCode })
+    );
   }
 
   redirect('/admin/contacts');
