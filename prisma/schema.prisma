@@ -19,19 +19,19 @@ model SurroundingPlace {
   routeLink         String
   distance          Float     
 
-  title             Title     @relation(fields: [titleId], references: [id])
+  title             Title     @relation(fields: [titleId], references: [id], onDelete: Cascade)
   titleId          String    @db.ObjectId
 
-  subtitle          Subtitle      @relation(fields: [subtitleId], references: [id])
+  subtitle          Subtitle      @relation(fields: [subtitleId], references: [id], onDelete: Cascade)
   subtitleId       String    @db.ObjectId
 
-  description       Description   @relation(fields: [descriptionId], references: [id])
+  description       Description   @relation(fields: [descriptionId], references: [id], onDelete: Cascade)
   descriptionId    String    @db.ObjectId
 
-  imageAltText      ImageAltText  @relation(fields: [imageAltTextId], references: [id])
+  imageAltText      ImageAltText  @relation(fields: [imageAltTextId], references: [id], onDelete: Cascade)
   imageAltTextId   String    @db.ObjectId
 
-  coords            Coords    @relation(fields: [coordsId], references: [id])
+  coords            Coords    @relation(fields: [coordsId], references: [id], onDelete: Cascade)
   coordsId         String    @db.ObjectId
 }
 
