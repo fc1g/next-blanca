@@ -26,7 +26,12 @@ export const deleteOne = async (id: string) => {
       throw new Error(`Surrounding place with ID: ${id} does not exist.`);
     }
 
-    await Promise.all([
+    const promises = [
+      prisma.surroundingPlace.delete({
+        where: {
+          id,
+        },
+      }),
       prisma.title.delete({
         where: {
           id: place.titleId,
@@ -52,7 +57,9 @@ export const deleteOne = async (id: string) => {
           id: place.coordsId,
         },
       }),
-    ]);
+    ];
+
+    await Promise.all(promises);
 
     console.log(`Successfully deleted surrounding place with ID: ${id}`);
     revalidatePath('/admin/surrounding');
