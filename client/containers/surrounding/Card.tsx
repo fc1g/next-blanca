@@ -33,13 +33,14 @@ export default function PlaceCard({
         <CardDescription>{subtitle[activeLocale]}</CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="relative h-48">
+        <div className="relative h-48 w-full">
           <Image
             loading="lazy"
             src={image}
             alt={imageAltText[activeLocale]}
             fill
             sizes="25vw"
+            className="object-cover"
           />
         </div>
       </CardContent>

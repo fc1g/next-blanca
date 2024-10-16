@@ -59,7 +59,7 @@ export default function WrappedPageUpdate({ data, t }: WrappedPageUpdateProps) {
       className="mx-auto my-12 grid max-w-screen-xl items-end gap-4 px-2 sm:grid-cols-2 md:grid-cols-3 lg:px-6"
     >
       <fieldset>
-        <Label htmlFor="titleEn">{t.title}</Label>
+        <Label htmlFor="titleEn">{t.title}En</Label>
         <Input
           id="titleEn"
           name="titleEn"
@@ -74,7 +74,7 @@ export default function WrappedPageUpdate({ data, t }: WrappedPageUpdateProps) {
       </fieldset>
 
       <fieldset>
-        <Label htmlFor="titlePl">{t.title}</Label>
+        <Label htmlFor="titlePl">{t.title}Pl</Label>
         <Input
           id="titlePl"
           name="titlePl"
@@ -89,7 +89,7 @@ export default function WrappedPageUpdate({ data, t }: WrappedPageUpdateProps) {
       </fieldset>
 
       <fieldset>
-        <Label htmlFor="titleEs">{t.title}</Label>
+        <Label htmlFor="titleEs">{t.title}Es</Label>
         <Input
           id="titleEs"
           name="titleEs"
@@ -104,7 +104,7 @@ export default function WrappedPageUpdate({ data, t }: WrappedPageUpdateProps) {
       </fieldset>
 
       <fieldset>
-        <Label htmlFor="subtitleEn">{t.subtitle}</Label>
+        <Label htmlFor="subtitleEn">{t.subtitle}En</Label>
         <Textarea
           id="subtitleEn"
           name="subtitleEn"
@@ -118,7 +118,7 @@ export default function WrappedPageUpdate({ data, t }: WrappedPageUpdateProps) {
       </fieldset>
 
       <fieldset>
-        <Label htmlFor="subtitlePl">{t.subtitle}</Label>
+        <Label htmlFor="subtitlePl">{t.subtitle}Pl</Label>
         <Textarea
           id="subtitlePl"
           name="subtitlePl"
@@ -132,7 +132,7 @@ export default function WrappedPageUpdate({ data, t }: WrappedPageUpdateProps) {
       </fieldset>
 
       <fieldset>
-        <Label htmlFor="subtitleEs">{t.subtitle}</Label>
+        <Label htmlFor="subtitleEs">{t.subtitle}Es</Label>
         <Textarea
           id="subtitleEs"
           name="subtitleEs"
@@ -146,7 +146,7 @@ export default function WrappedPageUpdate({ data, t }: WrappedPageUpdateProps) {
       </fieldset>
 
       <fieldset>
-        <Label htmlFor="descriptionEn">{t.description}</Label>
+        <Label htmlFor="descriptionEn">{t.description}En</Label>
         <Textarea
           id="descriptionEn"
           name="descriptionEn"
@@ -158,7 +158,7 @@ export default function WrappedPageUpdate({ data, t }: WrappedPageUpdateProps) {
       </fieldset>
 
       <fieldset>
-        <Label htmlFor="descriptionPl">{t.description}</Label>
+        <Label htmlFor="descriptionPl">{t.description}Pl</Label>
         <Textarea
           id="descriptionPl"
           name="descriptionPl"
@@ -170,7 +170,7 @@ export default function WrappedPageUpdate({ data, t }: WrappedPageUpdateProps) {
       </fieldset>
 
       <fieldset>
-        <Label htmlFor="descriptionEs">{t.description}</Label>
+        <Label htmlFor="descriptionEs">{t.description}Es</Label>
         <Textarea
           id="descriptionEs"
           name="descriptionEs"
@@ -182,7 +182,7 @@ export default function WrappedPageUpdate({ data, t }: WrappedPageUpdateProps) {
       </fieldset>
 
       <fieldset>
-        <Label htmlFor="imageAltTextEn">{t.imageAltText}</Label>
+        <Label htmlFor="imageAltTextEn">{t.imageAltText}En</Label>
         <Textarea
           id="imageAltTextEn"
           name="imageAltTextEn"
@@ -195,7 +195,7 @@ export default function WrappedPageUpdate({ data, t }: WrappedPageUpdateProps) {
       </fieldset>
 
       <fieldset>
-        <Label htmlFor="imageAltTextPl">{t.imageAltText}</Label>
+        <Label htmlFor="imageAltTextPl">{t.imageAltText}Pl</Label>
         <Textarea
           id="imageAltTextPl"
           name="imageAltTextPl"
@@ -208,7 +208,7 @@ export default function WrappedPageUpdate({ data, t }: WrappedPageUpdateProps) {
       </fieldset>
 
       <fieldset>
-        <Label htmlFor="imageAltTextEs">{t.imageAltText}</Label>
+        <Label htmlFor="imageAltTextEs">{t.imageAltText}Es</Label>
         <Textarea
           id="imageAltTextEs"
           name="imageAltTextEs"
