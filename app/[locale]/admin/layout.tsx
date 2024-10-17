@@ -1,3 +1,4 @@
+import ErrorBoundary from '@/client/components/ErrorBoundary';
 import Header from '@/client/components/ui/header/Header';
 import { Children } from '@/client/types/Children';
 import { Params } from '@/client/types/Params';
@@ -11,7 +12,9 @@ export default function layout({ children, params: { locale } }: LayoutProps) {
     <>
       <Header logoStyles="text-secondary-foreground" className="" />
 
-      <main className="flex-auto">{children}</main>
+      <ErrorBoundary>
+        <main className="flex-auto">{children}</main>
+      </ErrorBoundary>
     </>
   );
 }
