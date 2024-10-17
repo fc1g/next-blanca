@@ -186,6 +186,7 @@ export default function WrappedPageUpdate({ data, t }: WrappedPageUpdateProps) {
         <Textarea
           id="imageAltTextEn"
           name="imageAltTextEn"
+          minLength={20}
           maxLength={100}
           value={imageAltTextEn}
           onChange={e => setImageAltTextEn(e.target.value)}
@@ -199,6 +200,7 @@ export default function WrappedPageUpdate({ data, t }: WrappedPageUpdateProps) {
         <Textarea
           id="imageAltTextPl"
           name="imageAltTextPl"
+          minLength={20}
           maxLength={100}
           value={imageAltTextPl}
           onChange={e => setImageAltTextPl(e.target.value)}
@@ -212,6 +214,7 @@ export default function WrappedPageUpdate({ data, t }: WrappedPageUpdateProps) {
         <Textarea
           id="imageAltTextEs"
           name="imageAltTextEs"
+          minLength={20}
           maxLength={100}
           value={imageAltTextEs}
           onChange={e => setImageAltTextEs(e.target.value)}

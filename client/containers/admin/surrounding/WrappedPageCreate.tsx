@@ -138,6 +138,7 @@ export default function WrappedPageCreate({ t }: WrappedPageCreateProps) {
         <Textarea
           id="imageAltTextEn"
           name="imageAltTextEn"
+          minLength={20}
           maxLength={100}
           placeholder={t.imageAltText}
           required
@@ -149,6 +150,7 @@ export default function WrappedPageCreate({ t }: WrappedPageCreateProps) {
         <Textarea
           id="imageAltTextPl"
           name="imageAltTextPl"
+          minLength={20}
           maxLength={100}
           placeholder={t.imageAltText}
           required
@@ -160,6 +162,7 @@ export default function WrappedPageCreate({ t }: WrappedPageCreateProps) {
         <Textarea
           id="imageAltTextEs"
           name="imageAltTextEs"
+          minLength={20}
           maxLength={100}
           placeholder={t.imageAltText}
           required
