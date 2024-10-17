@@ -179,6 +179,10 @@ export default JSON.parse(`{
         "lat": "Latitude",
         "lng": "Longitude"
       }
+    },
+    "form": {
+      "submit": "Submit",
+      "submitting": "Submitting"
     }
   },
   "footer": {
@@ -187,7 +191,9 @@ export default JSON.parse(`{
   "error": {
     "message": "We are already working to solve the problem.",
     "reset": "Reset",
-    "empty": "This list is empty"
+    "empty": "This list is empty",
+    "validation": "Validation failed. Please provide valid data",
+    "notFound": "Not found"
   }
 }
 `) as Translation;

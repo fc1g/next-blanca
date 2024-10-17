@@ -57,7 +57,12 @@ export const update = async (id: string, formData: FormData) => {
     });
 
     if (!existingPlace) {
-      throw new Error(`Surrounding place with id ${id} not found.`);
+      throw new Error(
+        JSON.stringify({
+          statusCode: 404,
+          message: `Surrounding place with id ${id} not found.`,
+        })
+      );
     }
 
     const hasChanged = (
@@ -163,22 +168,12 @@ export const update = async (id: string, formData: FormData) => {
     }
   } catch (err) {
     if (err instanceof ZodError) {
-      throw new Error(
-        JSON.stringify({
-          message: 'Validation failed. Please provide valid data',
-          details: err.errors.map(e => e.message).join(', '),
-          statusCode: 400,
-        })
-      );
+      console.log('Validation failed:', err);
+      throw err;
     }
 
-    throw new Error(
-      JSON.stringify({
-        message: 'Failed to create surroundingPlace',
-        details: '',
-        statusCode: 500,
-      })
-    );
+    console.error('An error occurred while updating surroundingPlace:', err);
+    throw new Error('Failed to update surroundingPlace');
   }
   redirect('/admin/surrounding');
 };

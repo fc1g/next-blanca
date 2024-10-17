@@ -43,7 +43,7 @@ export const fetchMany = async (searchParams?: URLSearchParams) => {
 
     return { places, totalResults };
   } catch (err) {
-    console.error('Error fetching places:', err);
-    throw new Error('Failed to fetch places');
+    console.error('An error occurred while fetching surroundingPlaces:', err);
+    throw new Error('Failed to fetch surroundingPlaces');
   }
 };

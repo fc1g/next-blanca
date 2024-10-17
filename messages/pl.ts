@@ -179,6 +179,10 @@ export default JSON.parse(`{
         "lat": "Szerokość geograficzna",
         "lng": "Długość geograficzna"
       }
+    },
+    "form": {
+      "submit": "Prześlij",
+      "submitting": "Przesłanie"
     }
   },
   "footer": {
@@ -187,6 +191,8 @@ export default JSON.parse(`{
   "error": {
     "message": "Już pracujemy nad rozwiązaniem problemu.",
     "reset": "Reset",
-    "empty": "Ta lista jest pusta"
+    "empty": "Ta lista jest pusta",
+    "validation": "Walidacja nie powiodła się. Podaj prawidłowe dane",
+    "notFound": "Nie znaleziono"
   }
 }`) as Translation;

@@ -26,22 +26,12 @@ export const update = async (id: string, formData: FormData) => {
     });
   } catch (err) {
     if (err instanceof ZodError) {
-      throw new Error(
-        JSON.stringify({
-          message: 'Validation failed. Please provide valid data',
-          details: err.errors.map(e => e.message).join(', '),
-          statusCode: 400,
-        })
-      );
+      console.error('Validation failed:', err);
+      throw err;
     }
 
-    throw new Error(
-      JSON.stringify({
-        message: 'Failed to create bookedDate',
-        details: '',
-        statusCode: 500,
-      })
-    );
+    console.error('An error occurred while updating bookedDate:', err);
+    throw new Error('Failed to update bookedDate');
   }
   redirect('/admin/contacts');
 };

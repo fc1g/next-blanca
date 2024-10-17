@@ -37,6 +37,6 @@ export const fetchManyWithParams = async (
     return { bookedDates, totalResults };
   } catch (err) {
     console.error('Error fetching booked dates:', err);
-    throw new Error('Failed to fetch booked dates.');
+    throw new Error('Failed to fetch bookedDates');
   }
 };

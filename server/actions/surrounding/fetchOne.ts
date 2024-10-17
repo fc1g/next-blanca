@@ -23,11 +23,16 @@ export const fetchOne = async (id: string) => {
     });
 
     if (!surroundingPlace)
-      throw new Error(`Failed to fetch a place with id: ${id}`);
+      throw new Error(
+        JSON.stringify({
+          statusCode: 404,
+          message: `Failed to fetch a place with id: ${id}`,
+        })
+      );
 
     return { ...surroundingPlace, image: convertImage(surroundingPlace.image) };
   } catch (err) {
-    console.error(err);
-    throw new Error('Failed to fetch place');
+    console.error('An error occurred while fetching surroundingPlace:', err);
+    throw new Error('Failed to fetch surroundingPlace');
   }
 };

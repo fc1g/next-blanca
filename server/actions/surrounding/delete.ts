@@ -3,10 +3,6 @@
 import { prisma } from '@/server/db/prisma-client';
 import { revalidatePath } from 'next/cache';
 
-type PrismaError = {
-  code?: string;
-} & Error;
-
 export const deleteOne = async (id: string) => {
   try {
     const place = await prisma.surroundingPlace.findUnique({
@@ -23,7 +19,12 @@ export const deleteOne = async (id: string) => {
     });
 
     if (!place) {
-      throw new Error(`Surrounding place with ID: ${id} does not exist.`);
+      throw new Error(
+        JSON.stringify({
+          statusCode: 404,
+          message: `Surrounding place with ID: ${id} does not exist.`,
+        })
+      );
     }
 
     await prisma.$transaction([
@@ -50,14 +51,9 @@ export const deleteOne = async (id: string) => {
     console.log(`Successfully deleted surrounding place with ID: ${id}`);
     revalidatePath('/admin/surrounding');
   } catch (err) {
-    console.error(`Error deleting surrounding place with ID: ${id}`, err);
-
-    if ((err as PrismaError).code === 'P2025') {
-      throw new Error(`Surrounding place with ID: ${id} does not exist.`);
-    }
-
+    console.error('An error occurred:', err);
     throw new Error(
-      'An error occurred while trying to delete the surrounding place.'
+      'An error occurred while trying to delete the surroundingPlace.'
     );
   }
 };

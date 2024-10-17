@@ -12,9 +12,8 @@ export const create = async (formData: FormData) => {
     if (!imageFile || !(imageFile instanceof File)) {
       throw new Error(
         JSON.stringify({
-          message: 'Failed to create surroundingPlace',
-          details: 'Image file is required and must be a valid file',
-          statusCode: 400,
+          code: 'custom',
+          message: 'Image file is required and must be a valid file',
         })
       );
     }
@@ -87,7 +86,7 @@ export const create = async (formData: FormData) => {
         }),
       ]);
 
-    await prisma.surroundingPlace.create({
+    const newSurroundingPlace = await prisma.surroundingPlace.create({
       data: {
         image: parsedData.image,
         routeLink: parsedData.routeLink,
@@ -99,24 +98,18 @@ export const create = async (formData: FormData) => {
         coordsId: coords.id,
       },
     });
+
+    console.log(
+      `Successfully created surrounding place with ID: ${newSurroundingPlace.id}`
+    );
   } catch (err) {
     if (err instanceof ZodError) {
-      throw new Error(
-        JSON.stringify({
-          message: 'Validation failed. Please provide valid data',
-          details: err.errors.map(e => e.message).join(', '),
-          statusCode: 400,
-        })
-      );
+      console.error('Validation failed:', err);
+      throw err;
     }
 
-    throw new Error(
-      JSON.stringify({
-        message: 'Failed to create surroundingPlace',
-        details: '',
-        statusCode: 500,
-      })
-    );
+    console.error('An error occurred while creating surroundingPlace:', err);
+    throw new Error('Failed to create surroundingPlace');
   }
   redirect('/admin/surrounding');
 };

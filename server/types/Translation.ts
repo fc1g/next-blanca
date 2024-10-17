@@ -172,9 +172,15 @@ export type AdminSurrounding = {
   };
 };
 
+export type AdminForm = {
+  submit: string;
+  submitting: string;
+};
+
 export type Admin = {
   calendar: AdminCalendar;
   surrounding: AdminSurrounding;
+  form: AdminForm;
 };
 
 export type Footer = {
@@ -185,6 +191,8 @@ export type ErrorMessages = {
   message: string;
   reset: string;
   empty: string;
+  validation: string;
+  notFound: string;
 };
 
 export type Translation = {

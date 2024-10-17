@@ -15,11 +15,17 @@ export const deleteExpired = async (id: string): Promise<void> => {
     console.log(`Deleted booked date with id: ${deletedDate.id}`);
     return;
   } catch (err) {
-    console.error(`Error deleting booked date with id ${id}:`, err);
-
     if ((err as PrismaError).code === 'P2025') {
-      throw new Error(`Booked date with id ${id} does not exist.`);
+      console.error('BookedDate doesn\'t exist:', err);
+      throw new Error(
+        JSON.stringify({
+          statusCode: 404,
+          message: `Booked date with id ${id} does not exist.`,
+        })
+      );
     }
+
+    console.error('An error occurred while deleting expired bookedDate:', err);
     throw new Error(
       'An error occurred while trying to delete the booked date.'
     );

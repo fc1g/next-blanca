@@ -12,28 +12,21 @@ export const create = async (formData: FormData) => {
 
     const parsedData = bookedDateSchema.parse({ initialDate, deadlineDate });
 
-    await prisma.bookedDate.create({
+    const newBookedDate = await prisma.bookedDate.create({
       data: parsedData,
     });
-  } catch (err) {
+
+    console.log(
+      `Successfully created booked date with ID: ${newBookedDate.id}`
+    );
+    redirect('/admin/contacts');
+  } catch (err: unknown) {
     if (err instanceof ZodError) {
-      throw new Error(
-        JSON.stringify({
-          message: 'Validation failed. Please provide valid data',
-          details: err.errors.map(e => e.message).join(', '),
-          statusCode: 400,
-        })
-      );
+      console.error('Validation failed:', err);
+      throw err;
     }
 
-    throw new Error(
-      JSON.stringify({
-        message: 'Failed to create bookedDate',
-        details: '',
-        statusCode: 500,
-      })
-    );
+    console.error('An error occurred while creating bookedDate:', err);
+    throw new Error('Failed to create bookedDate');
   }
-
-  redirect('/admin/contacts');
 };

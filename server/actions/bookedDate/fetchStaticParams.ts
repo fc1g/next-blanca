@@ -16,7 +16,7 @@ export const fetchStaticParams = async (): Promise<StaticParams> => {
 
     return bookedDatesId;
   } catch (err) {
-    console.error('Error fetching static params:', err);
+    console.error('Failed to fetch static params:', err);
     throw new Error('Failed to fetch static params');
   }
 };
