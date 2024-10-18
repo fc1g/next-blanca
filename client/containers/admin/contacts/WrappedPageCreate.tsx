@@ -4,6 +4,11 @@ import SubmitBtn from '@/client/components/SubmitBtn';
 import { Input } from '@/client/components/ui/input';
 import { create } from '@/server/actions/bookedDate/create';
 import { Label } from '@/client/components/ui/label';
+import { useFormState } from 'react-dom';
+import { useToast } from '@/client/hooks/use-toast';
+import { useEffect } from 'react';
+import { useRouter } from '@/server/libs/i18n/routing';
+import { ToastAction } from '@/client/components/ui/toast';
 
 type WrappedPageCreate = {
   t: {
@@ -13,10 +18,37 @@ type WrappedPageCreate = {
 };
 
 export default function WrappedPageCreate({ t }: WrappedPageCreate) {
+  const [error, formAction] = useFormState(create, {
+    message: '',
+    details: '',
+  });
+  const { toast } = useToast();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!error.details || !error.message) return;
+
+    toast({
+      title: error.message,
+      description: error.details,
+      variant: error.message === 'Success' ? 'default' : 'destructive',
+      duration: 10000,
+      action:
+        error.message === 'Success' ? (
+          <ToastAction
+            onClick={() => router.back()}
+            altText="Return to contacts page"
+          >
+            Return
+          </ToastAction>
+        ) : undefined,
+    });
+  }, [toast, error, router]);
+
   return (
     <form
       className="flex h-96 w-full items-center justify-center"
-      action={create}
+      action={formAction}
     >
       <div className="mt-4 flex items-end justify-center space-x-6">
         <fieldset>

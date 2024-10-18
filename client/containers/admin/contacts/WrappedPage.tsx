@@ -1,6 +1,7 @@
 'use client';
 
 import CustomePagination from '@/client/components/CustomePagination';
+// import { useToast } from '@/client/hooks/use-toast';
 import { BookedDate } from '@/client/types/BookedDate';
 import { deleteOne } from '@/server/actions/bookedDate/delete';
 import { Link, usePathname, useRouter } from '@/server/libs/i18n/routing';
@@ -26,6 +27,7 @@ export default function WrappedPage({ data, results, t }: WrappedPageProps) {
   const searchParams = new URLSearchParams(useSearchParams());
   const router = useRouter();
   const pathname = usePathname();
+  // const { toast } = useToast();
   const currPage = Number(searchParams.get('page')) || 1;
   if (!data.length && currPage > 1) {
     searchParams.set('page', `${currPage - 1}`);

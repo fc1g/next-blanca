@@ -4,7 +4,12 @@ import SubmitBtn from '@/client/components/SubmitBtn';
 import { Input } from '@/client/components/ui/input';
 import { Label } from '@/client/components/ui/label';
 import { Textarea } from '@/client/components/ui/textarea';
+import { ToastAction } from '@/client/components/ui/toast';
+import { useToast } from '@/client/hooks/use-toast';
 import { create } from '@/server/actions/surrounding/create';
+import { useRouter } from '@/server/libs/i18n/routing';
+import { useEffect } from 'react';
+import { useFormState } from 'react-dom';
 
 type WrappedPageCreateProps = {
   t: {
@@ -23,9 +28,36 @@ type WrappedPageCreateProps = {
 };
 
 export default function WrappedPageCreate({ t }: WrappedPageCreateProps) {
+  const [error, formAction] = useFormState(create, {
+    message: '',
+    details: '',
+  });
+  const { toast } = useToast();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!error.details || !error.message) return;
+
+    toast({
+      title: error.message,
+      description: error.details,
+      variant: error.message === 'Success' ? 'default' : 'destructive',
+      duration: 10000,
+      action:
+        error.message === 'Success' ? (
+          <ToastAction
+            onClick={() => router.back()}
+            altText="Return to contacts page"
+          >
+            Return
+          </ToastAction>
+        ) : undefined,
+    });
+  }, [toast, error, router]);
+
   return (
     <form
-      action={create}
+      action={formAction}
       className="mx-auto my-12 grid max-w-screen-xl items-end gap-4 px-2 sm:grid-cols-2 md:grid-cols-3 lg:px-6"
     >
       <fieldset>

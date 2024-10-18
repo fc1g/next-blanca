@@ -3,9 +3,14 @@
 import { surroundingPlaceSchema } from '@/server/models/SurroundingPlace';
 import { ZodError } from 'zod';
 import { prisma } from '@/server/db/prisma-client';
-import { redirect } from '@/server/libs/i18n/routing';
+import { revalidatePath } from 'next/cache';
 
-export const create = async (formData: FormData) => {
+type prevStateProps = {
+  message: string;
+  details: string;
+};
+
+export const create = async (_: prevStateProps, formData: FormData) => {
   try {
     const imageFile = formData.get('image');
 
@@ -102,14 +107,25 @@ export const create = async (formData: FormData) => {
     console.log(
       `Successfully created surrounding place with ID: ${newSurroundingPlace.id}`
     );
+    revalidatePath('/admin/surrounding');
+
+    return {
+      message: 'Success',
+      details: 'Successfully created surroundingPlace',
+    };
   } catch (err) {
     if (err instanceof ZodError) {
       console.error('Validation failed:', err);
-      throw err;
+      return {
+        message: 'Validation failed',
+        details: err.errors.map(e => e.message).join(', '),
+      };
     }
 
     console.error('An error occurred while creating surroundingPlace:', err);
-    throw new Error('Failed to create surroundingPlace');
+    return {
+      message: 'Failed',
+      details: 'Failed to create surroundingPlace',
+    };
   }
-  redirect('/admin/surrounding');
 };

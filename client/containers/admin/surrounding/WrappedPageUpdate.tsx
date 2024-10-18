@@ -4,9 +4,14 @@ import SubmitBtn from '@/client/components/SubmitBtn';
 import { Input } from '@/client/components/ui/input';
 import { Label } from '@/client/components/ui/label';
 import { Textarea } from '@/client/components/ui/textarea';
+import { ToastAction } from '@/client/components/ui/toast';
+import { useToast } from '@/client/hooks/use-toast';
 import { SurroundingPlace } from '@/client/types/SurroundingPlace';
 import { update } from '@/server/actions/surrounding/update';
-import { useState } from 'react';
+import { useRouter } from '@/server/libs/i18n/routing';
+import { useEffect, useState } from 'react';
+import { useFormState } from 'react-dom';
+import { ZodError } from 'zod';
 
 type WrappedPageUpdateProps = {
   data: SurroundingPlace;
@@ -26,6 +31,46 @@ type WrappedPageUpdateProps = {
 };
 
 export default function WrappedPageUpdate({ data, t }: WrappedPageUpdateProps) {
+  const updateBookedDate = async (
+    _: {
+      message: string;
+      details: string;
+    },
+    formData: FormData
+  ) => {
+    const id = data.id;
+
+    try {
+      await update(id, formData);
+
+      return {
+        message: 'Success',
+        details: 'Successfully updated surroundingPlace',
+      };
+    } catch (err) {
+      if (err instanceof ZodError) {
+        console.error('Validation failed:', err);
+        return {
+          message: 'Validation failed',
+          details: err.errors.map(e => e.message).join(', '),
+        };
+      }
+
+      console.error('An error occurred while updating surroundingPlace:', err);
+      return {
+        message: 'Failed',
+        details: 'Failed to update surroundingPlace',
+      };
+    }
+  };
+
+  const [error, formAction] = useFormState(updateBookedDate, {
+    message: '',
+    details: '',
+  });
+  const { toast } = useToast();
+  const router = useRouter();
+
   const [titleEn, setTitleEn] = useState(data.title.en);
   const [titlePl, setTitlePl] = useState(data.title.pl);
   const [titleEs, setTitleEs] = useState(data.title.es);
@@ -47,11 +92,25 @@ export default function WrappedPageUpdate({ data, t }: WrappedPageUpdateProps) {
   const [lat, setLat] = useState(data.coords.lat);
   const [lng, setLng] = useState(data.coords.lng);
 
-  const formAction = async (formData: FormData) => {
-    const id = data.id;
+  useEffect(() => {
+    if (!error.details || !error.message) return;
 
-    await update(id, formData);
-  };
+    toast({
+      title: error.message,
+      description: error.details,
+      variant: error.message === 'Success' ? 'default' : 'destructive',
+      duration: 10000,
+      action:
+        error.message === 'Success' ? (
+          <ToastAction
+            onClick={() => router.back()}
+            altText="Return to contacts page"
+          >
+            Return
+          </ToastAction>
+        ) : undefined,
+    });
+  }, [toast, error, router]);
 
   return (
     <form

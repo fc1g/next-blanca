@@ -1,11 +1,16 @@
 'use server';
 
-import { redirect } from '@/server/libs/i18n/routing';
 import { prisma } from '@/server/db/prisma-client';
 import { bookedDateSchema } from '@/server/models/BookedDate';
+import { revalidatePath } from 'next/cache';
 import { ZodError } from 'zod';
 
-export const create = async (formData: FormData) => {
+type prevStateProps = {
+  message: string;
+  details: string;
+};
+
+export const create = async (_: prevStateProps, formData: FormData) => {
   try {
     const initialDate = formData.get('initialDate') as string;
     const deadlineDate = formData.get('deadlineDate') as string;
@@ -19,14 +24,24 @@ export const create = async (formData: FormData) => {
     console.log(
       `Successfully created booked date with ID: ${newBookedDate.id}`
     );
-    redirect('/admin/contacts');
+    revalidatePath('/admin/contacts');
+    return {
+      message: 'Success',
+      details: 'New bookedDate was Successfully created',
+    };
   } catch (err: unknown) {
     if (err instanceof ZodError) {
       console.error('Validation failed:', err);
-      throw err;
+      return {
+        message: 'Validation failed',
+        details: err.errors.map(e => e.message).join(', '),
+      };
     }
 
     console.error('An error occurred while creating bookedDate:', err);
-    throw new Error('Failed to create bookedDate');
+    return {
+      message: 'Failed',
+      details: 'An error occurred while creating bookedDate',
+    };
   }
 };
