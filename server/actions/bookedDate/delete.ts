@@ -1,6 +1,6 @@
 'use server';
 
-import { prisma } from '@/server/db/prisma-client';
+import { prisma } from '@/server/libs/prisma-client';
 import { revalidatePath } from 'next/cache';
 
 type PrismaError = {

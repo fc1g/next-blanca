@@ -9,6 +9,7 @@ import { useToast } from '@/client/hooks/use-toast';
 import { useEffect } from 'react';
 import { useRouter } from '@/server/libs/i18n/routing';
 import { ToastAction } from '@/client/components/ui/toast';
+import { FORM_TOAST_DURATION } from '@/client/utils';
 
 type WrappedPageCreate = {
   t: {
@@ -32,7 +33,7 @@ export default function WrappedPageCreate({ t }: WrappedPageCreate) {
       title: error.message,
       description: error.details,
       variant: error.message === 'Success' ? 'default' : 'destructive',
-      duration: 10000,
+      duration: FORM_TOAST_DURATION,
       action:
         error.message === 'Success' ? (
           <ToastAction

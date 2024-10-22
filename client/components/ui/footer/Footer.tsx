@@ -15,13 +15,23 @@ export default function Footer() {
         <Anchor href="https://tailwindcss.com/">Tailwind CSS</Anchor>
         <SocialList>
           <>
-            <SocialList.SocialItem href="https://www.facebook.com/people/CasaBlanca-Private-Heated-Pool/100091592920461/">
+            <SocialList.SocialItem
+              href="https://www.facebook.com/people/CasaBlanca-Private-Heated-Pool/100091592920461/"
+              label="Facebook"
+            >
               <FaFacebook className="text-lg text-muted-foreground transition duration-300 hover:-translate-y-1 hover:text-secondary-foreground sm:text-xl" />
-              <span className="sr-only">Facebook</span>
+              <span className="sr-only" lang="en">
+                Facebook
+              </span>
             </SocialList.SocialItem>
-            <SocialList.SocialItem href="https://www.instagram.com/casablanca_privateheatedpool?igsh=d2F5ZjJhOTJwdXBn">
+            <SocialList.SocialItem
+              href="https://www.instagram.com/casablanca_privateheatedpool?igsh=d2F5ZjJhOTJwdXBn"
+              label="Instagram"
+            >
               <FaInstagram className="text-lg text-muted-foreground transition duration-300 hover:-translate-y-1 hover:text-secondary-foreground sm:text-xl" />
-              <span className="sr-only">Instagram</span>
+              <span className="sr-only" lang="en">
+                Instagram
+              </span>
             </SocialList.SocialItem>
           </>
         </SocialList>

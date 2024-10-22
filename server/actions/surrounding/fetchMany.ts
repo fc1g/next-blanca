@@ -1,7 +1,7 @@
 'use server';
 
 import { convertImage } from '@/server/services/convertImageToString';
-import { prisma } from '@/server/db/prisma-client';
+import { prisma } from '@/server/libs/prisma-client';
 
 export const fetchMany = async (searchParams?: URLSearchParams) => {
   const sort = searchParams?.get('sort') || '';

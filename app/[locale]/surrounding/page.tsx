@@ -6,6 +6,7 @@ import { unstable_setRequestLocale } from 'next-intl/server';
 import { ReadonlyURLSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import { useTranslations } from 'next-intl';
+import ErrorBoundary from '@/client/components/ErrorBoundary';
 
 type SurroundingPageProps = {
   searchParams: ReadonlyURLSearchParams;
@@ -35,13 +36,15 @@ export default function SurroundingPage({
         }}
       />
 
-      <Suspense
-        fallback={
-          <SurroundingPageSkeleton limit={Number(params.get('limit'))} />
-        }
-      >
-        <WrappedContent searchParams={params} />
-      </Suspense>
+      <ErrorBoundary>
+        <Suspense
+          fallback={
+            <SurroundingPageSkeleton limit={Number(params.get('limit'))} />
+          }
+        >
+          <WrappedContent searchParams={params} />
+        </Suspense>
+      </ErrorBoundary>
     </>
   );
 }

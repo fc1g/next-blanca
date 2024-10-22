@@ -7,7 +7,17 @@ import Hamburger from './Hamburger';
 import LangList from './LangList';
 import Nav from './Nav';
 
-export default function WrappedHeaderNav() {
+type WrappedHeaderNavProps = {
+  en: string;
+  pl: string;
+  es: string;
+};
+
+export default function WrappedHeaderNav({
+  en,
+  pl,
+  es,
+}: WrappedHeaderNavProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -23,7 +33,7 @@ export default function WrappedHeaderNav() {
         </div>
 
         <Suspense fallback={<Skeleton className="h-9 w-24 rounded-sm" />}>
-          <LangList />
+          <LangList en={en} pl={pl} es={es} />
         </Suspense>
 
         <div className="md:hidden">

@@ -13,6 +13,8 @@ import {
 import { format } from 'date-fns';
 import { useLocale } from 'next-intl';
 import { enUS, es, pl } from 'date-fns/locale';
+import { useMemo } from 'react';
+import { getPrice } from '@/client/services/getPrice';
 
 const chartConfig: ChartConfig = {
   price: {
@@ -21,24 +23,21 @@ const chartConfig: ChartConfig = {
   },
 };
 
+type ChartData = {
+  month: string;
+  price: number;
+};
+
 export default function ContactsChart() {
   const localeActive = useLocale();
   const lang = localeActive === 'en' ? enUS : localeActive === 'pl' ? pl : es;
 
-  const chartData = [
-    { month: format(new Date(2024, 0), 'MMM', { locale: lang }), price: 150 },
-    { month: format(new Date(2024, 1), 'MMM', { locale: lang }), price: 150 },
-    { month: format(new Date(2024, 2), 'MMM', { locale: lang }), price: 150 },
-    { month: format(new Date(2024, 3), 'MMM', { locale: lang }), price: 170 },
-    { month: format(new Date(2024, 4), 'MMM', { locale: lang }), price: 170 },
-    { month: format(new Date(2024, 5), 'MMM', { locale: lang }), price: 200 },
-    { month: format(new Date(2024, 6), 'MMM', { locale: lang }), price: 250 },
-    { month: format(new Date(2024, 7), 'MMM', { locale: lang }), price: 280 },
-    { month: format(new Date(2024, 8), 'MMM', { locale: lang }), price: 200 },
-    { month: format(new Date(2024, 9), 'MMM', { locale: lang }), price: 170 },
-    { month: format(new Date(2024, 10), 'MMM', { locale: lang }), price: 150 },
-    { month: format(new Date(2024, 11), 'MMM', { locale: lang }), price: 150 },
-  ];
+  const chartData: ChartData[] = useMemo(() => {
+    return Array.from({ length: 12 }, (_, i) => ({
+      month: format(new Date(2024, i), 'MMM', { locale: lang }),
+      price: getPrice(i),
+    }));
+  }, [lang]);
 
   return (
     <ChartContainer config={chartConfig} className="min-h-[200px] w-full">

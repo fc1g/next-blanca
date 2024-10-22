@@ -10,7 +10,13 @@ import {
 } from '../dropdown-menu';
 import { Button } from '../button';
 
-export default function LangList() {
+type LangListProps = {
+  en: string;
+  pl: string;
+  es: string;
+};
+
+export default function LangList({ en, pl, es }: LangListProps) {
   const [isPending, startTransition] = useTransition();
   const pathname = usePathname();
   const router = useRouter();
@@ -25,13 +31,14 @@ export default function LangList() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="w-24" asChild disabled={isPending}>
+      <DropdownMenuTrigger
+        aria-haspopup="menu"
+        className="w-24"
+        asChild
+        disabled={isPending}
+      >
         <Button variant="outline">
-          {localeActive === 'en'
-            ? 'English'
-            : localeActive === 'pl'
-              ? 'Polish'
-              : 'Spanish'}
+          {localeActive === 'en' ? en : localeActive === 'pl' ? pl : es}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
@@ -39,19 +46,19 @@ export default function LangList() {
           className="cursor-pointer"
           onClick={() => changeLocale('en')}
         >
-          English
+          {en}
         </DropdownMenuItem>
         <DropdownMenuItem
           className="cursor-pointer"
           onClick={() => changeLocale('pl')}
         >
-          Polish
+          {pl}
         </DropdownMenuItem>
         <DropdownMenuItem
           className="cursor-pointer"
           onClick={() => changeLocale('es')}
         >
-          Spanish
+          {es}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

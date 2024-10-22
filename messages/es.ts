@@ -8,7 +8,12 @@ export default JSON.parse(`{
       "surrounding": "Entorno",
       "contacts": "Contactos"
     },
-    "hamburger": "Menú móvil"
+    "hamburger": "Menú móvil",
+    "langList": {
+      "en": "Inglés",
+      "pl": "Polaco",
+      "es": "Español"
+    }
   },
   "homepage": {
     "hero": {
@@ -98,6 +103,9 @@ export default JSON.parse(`{
   },
   "contacts": {
     "monthPriceTitle": "Precio mensual (mensual)",
+    "charts": {
+      "title": "Gráficos de contactos"
+    },
     "months": {
       "october": "Octubre",
       "november": "Noviembre",
@@ -192,7 +200,6 @@ export default JSON.parse(`{
     "message": "Ya estamos trabajando para resolver el problema.",
     "reset": "Restablecer",
     "empty": "Esta lista está vacía",
-    "validation": "Validación fallida. Por favor, proporcione datos válidos",
-    "notFound": "No se ha encontrado"
+    "pity": "Desafortunadamente, ocurrió un error."
   }
 }`) as Translation;

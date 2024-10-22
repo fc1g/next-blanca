@@ -37,9 +37,9 @@ export default function Place({
           <Image
             src={image}
             alt={imageAltText[activeLocale]}
-            priority
+            loading="lazy"
             fill
-            sizes="50vw"
+            sizes="(max-width: 768px) 100vw, 50vw"
             className="object-cover"
           />
         </div>

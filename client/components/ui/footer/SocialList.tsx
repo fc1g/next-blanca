@@ -6,12 +6,18 @@ export default function SocialList({ children }: Children) {
 
 type SocialItemProps = {
   href: string;
+  label: string;
 } & Children;
 
-function SocialItem({ href, children }: SocialItemProps) {
+function SocialItem({ href, label, children }: SocialItemProps) {
   return (
     <li>
-      <a href={href} target="blank" rel="noopener noreferrer">
+      <a
+        href={href}
+        target="blank"
+        rel="noopener noreferrer"
+        aria-label={label}
+      >
         {children}
       </a>
     </li>

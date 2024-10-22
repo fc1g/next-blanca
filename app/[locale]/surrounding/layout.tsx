@@ -12,7 +12,9 @@ export default function layout({ children, params: { locale } }: LayoutProps) {
     <>
       <Header logoStyles="text-secondary-foreground" className="" />
 
-      <main className="flex-auto">{children}</main>
+      <main className="flex-auto" role="main">
+        {children}
+      </main>
     </>
   );
 }

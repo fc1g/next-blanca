@@ -31,6 +31,11 @@ export default function CustomePagination({
   const router = useRouter();
   const pathname = usePathname();
 
+  const handlePageChange = (newPage: number) => {
+    searchParams.set('page', `${newPage}`);
+    router.replace(`${pathname}?${searchParams.toString()}`);
+  };
+
   return (
     <Pagination>
       <PaginationContent>
@@ -41,8 +46,7 @@ export default function CustomePagination({
             onClick={() => {
               if (prevCondition) return;
 
-              searchParams.set('page', `${currPage - 1}`);
-              router.replace(`${pathname}?${searchParams.toString()}`);
+              handlePageChange(currPage - 1);
             }}
           />
         </PaginationItem>
@@ -50,12 +54,11 @@ export default function CustomePagination({
         <PaginationItem>
           <PaginationNext
             text={next}
-            className={`cursor-pointer ${nextCondition && 'pointer-events-none opacity-50'}`}
+            className={`cursor-pointer ${nextCondition ? 'pointer-events-none opacity-50' : ''}`}
             onClick={() => {
               if (nextCondition) return;
 
-              searchParams.set('page', `${currPage + 1}`);
-              router.replace(`${pathname}?${searchParams.toString()}`);
+              handlePageChange(currPage + 1);
             }}
           />
         </PaginationItem>

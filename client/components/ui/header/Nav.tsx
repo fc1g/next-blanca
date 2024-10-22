@@ -13,7 +13,11 @@ export default function Nav({ className, setIsOpen, children }: NavProps) {
   const pathname = usePathname();
 
   return (
-    <ul className={`${className} rounded-lg`}>
+    <ul
+      aria-label="navigation"
+      role="navigation"
+      className={`${className} rounded-lg`}
+    >
       {Links.map(link => (
         <li className="group rounded px-3 py-3 md:p-0" key={link.label}>
           <Link
@@ -23,7 +27,6 @@ export default function Nav({ className, setIsOpen, children }: NavProps) {
           >
             {t(link.label)}
           </Link>
-          <span className="sr-only">{t(link.label)}</span>
         </li>
       ))}
 

@@ -10,6 +10,8 @@ export default function Hamburger({ isOpen, setIsOpen }: HamburgerProps) {
 
   return (
     <button
+      aria-label={isOpen ? 'Close menu' : 'Open menu'}
+      aria-expanded={isOpen}
       type="button"
       onClick={setIsOpen}
       className={`hamburger z-[9999999999] block md:hidden ${isOpen ? 'open' : ''}`}

@@ -45,16 +45,16 @@ import twinRoomLightDesktop from '@/public/images/desktop/twinRoomLight.webp';
 import twinRoomLightMobile from '@/public/images/mobile/twinRoomLight.webp';
 import Image from 'next/image';
 
+type ImageSources = 'desktop' | 'mobile';
+
 type Images = {
-  src: {
-    desktop: StaticImageData;
-    mobile: StaticImageData;
-  };
+  src: Record<ImageSources, StaticImageData>;
   altText: string;
 };
 
 export default function Gallery() {
   const t = useTranslations('about.gallery');
+
   const images: Images[] = [
     {
       src: {
@@ -154,9 +154,9 @@ export default function Gallery() {
           {images.map(image => (
             <CarouselItem className="relative h-screen" key={image.altText}>
               <Image
-                priority
+                loading="lazy"
                 fill
-                sizes="80vw"
+                sizes="100vw"
                 src={image.src.desktop}
                 alt={image.altText}
                 className="hidden rounded object-cover md:block"
@@ -172,8 +172,14 @@ export default function Gallery() {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious className="absolute left-5 top-1/2 -translate-y-1/2" />
-        <CarouselNext className="absolute right-5 top-1/2 -translate-y-1/2" />
+        <CarouselPrevious
+          aria-label="previous"
+          className="absolute left-5 top-1/2 -translate-y-1/2"
+        />
+        <CarouselNext
+          aria-label="next"
+          className="absolute right-5 top-1/2 -translate-y-1/2"
+        />
       </Carousel>
     </section>
   );

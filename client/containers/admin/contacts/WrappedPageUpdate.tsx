@@ -11,6 +11,7 @@ import { ZodError } from 'zod';
 import { ToastAction } from '@/client/components/ui/toast';
 import { useRouter } from '@/server/libs/i18n/routing';
 import { useToast } from '@/client/hooks/use-toast';
+import { FORM_TOAST_DURATION } from '@/client/utils';
 
 type WrappedPageUpdate = {
   bookedDate: BookedDate;
@@ -73,7 +74,7 @@ export default function WrappedPageUpdate({
       title: error.message,
       description: error.details,
       variant: error.message === 'Success' ? 'default' : 'destructive',
-      duration: 10000,
+      duration: FORM_TOAST_DURATION,
       action:
         error.message === 'Success' ? (
           <ToastAction

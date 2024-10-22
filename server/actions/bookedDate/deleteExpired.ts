@@ -1,4 +1,4 @@
-import { prisma } from '@/server/db/prisma-client';
+import { prisma } from '@/server/libs/prisma-client';
 
 type PrismaError = {
   code?: string;
@@ -16,7 +16,7 @@ export const deleteExpired = async (id: string): Promise<void> => {
     return;
   } catch (err) {
     if ((err as PrismaError).code === 'P2025') {
-      console.error('BookedDate doesn\'t exist:', err);
+      console.error("BookedDate doesn't exist:", err);
       throw new Error(
         JSON.stringify({
           statusCode: 404,

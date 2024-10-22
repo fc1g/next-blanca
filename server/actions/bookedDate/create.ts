@@ -1,7 +1,7 @@
 'use server';
 
-import { prisma } from '@/server/db/prisma-client';
-import { bookedDateSchema } from '@/server/models/BookedDate';
+import { prisma } from '@/server/libs/prisma-client';
+import { bookedDateSchema } from '@/server/schemas/BookedDate';
 import { revalidatePath } from 'next/cache';
 import { ZodError } from 'zod';
 

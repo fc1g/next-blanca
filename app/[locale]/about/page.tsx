@@ -13,7 +13,7 @@ export default function AboutPage({ params: { locale } }: Params) {
         logoStyles="invisible"
       />
 
-      <main className="flex-auto">
+      <main className="flex-auto" role="main">
         <Gallery />
 
         <HouseInformation />

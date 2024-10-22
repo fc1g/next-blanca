@@ -6,7 +6,12 @@
       "surrounding": "Surrounding",
       "contacts": "Contacts"
     },
-    "hamburger": "Mobile menu"
+    "hamburger": "Mobile menu",
+    "langList": {
+      "en": "English",
+      "pl": "Polish",
+      "es": "Spanish"
+    }
   },
   "homepage": {
     "hero": {
@@ -96,6 +101,9 @@
   },
   "contacts": {
     "monthPriceTitle": "Month price (monthly)",
+    "charts": {
+      "title": "Contacts Charts"
+    },
     "months": {
       "october": "October",
       "november": "November",
@@ -190,7 +198,6 @@
     "message": "We are already working to solve the problem.",
     "reset": "Reset",
     "empty": "This list is empty",
-    "validation": "Validation failed. Please provide valid data",
-    "notFound": "Not found"
+    "pity": "Unfortunately, an error occurred."
   }
 }

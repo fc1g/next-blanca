@@ -14,7 +14,7 @@ export default function Home({ params: { locale } }: Params) {
         logoStyles="text-white"
       />
 
-      <main className="flex-auto">
+      <main className="flex-auto" role="main">
         <Hero />
 
         <Testimonials />

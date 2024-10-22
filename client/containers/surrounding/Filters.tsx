@@ -36,6 +36,25 @@ export default function Filters({
   const pathname = usePathname();
   const router = useRouter();
 
+  const filters = [
+    {
+      label: sortText,
+      type: 'sort',
+      options: [
+        { value: 'asc', label: sortData.low },
+        { value: 'desc', label: sortData.high },
+      ],
+    },
+    {
+      label: limitText,
+      type: 'limit',
+      options: [
+        { value: '3', label: limitData.three },
+        { value: '9', label: limitData.nine },
+      ],
+    },
+  ];
+
   function filterHandler(type: string, param: string) {
     searchParams.set(type, param);
     searchParams.set('page', '1');
@@ -45,33 +64,23 @@ export default function Filters({
   return (
     <section className="my-12 flex flex-col">
       <div className="flex items-center justify-end p-6 text-secondary-foreground [&>div:nth-child(odd)]:border-r [&>div:nth-child(odd)]:border-border">
-        <div className="px-4">
-          <DropdownMenu>
-            <DropdownMenuTrigger>{sortText}</DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuItem onClick={() => filterHandler('sort', 'asc')}>
-                {sortData.low}
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => filterHandler('sort', 'desc')}>
-                {sortData.high}
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-
-        <div className="px-4">
-          <DropdownMenu>
-            <DropdownMenuTrigger>{limitText}</DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuItem onClick={() => filterHandler('limit', '3')}>
-                {limitData.three}
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => filterHandler('limit', '9')}>
-                {limitData.nine}
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
+        {filters.map(filter => (
+          <div className="px-4" key={filter.type}>
+            <DropdownMenu>
+              <DropdownMenuTrigger>{filter.label}</DropdownMenuTrigger>
+              <DropdownMenuContent>
+                {filter.options.map(option => (
+                  <DropdownMenuItem
+                    key={option.value}
+                    onClick={() => filterHandler(filter.type, option.value)}
+                  >
+                    {option.label}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+        ))}
       </div>
 
       <Separator />

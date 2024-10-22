@@ -7,6 +7,7 @@ import { Textarea } from '@/client/components/ui/textarea';
 import { ToastAction } from '@/client/components/ui/toast';
 import { useToast } from '@/client/hooks/use-toast';
 import { SurroundingPlace } from '@/client/types/SurroundingPlace';
+import { FORM_TOAST_DURATION } from '@/client/utils';
 import { update } from '@/server/actions/surrounding/update';
 import { useRouter } from '@/server/libs/i18n/routing';
 import { useEffect, useState } from 'react';
@@ -99,7 +100,7 @@ export default function WrappedPageUpdate({ data, t }: WrappedPageUpdateProps) {
       title: error.message,
       description: error.details,
       variant: error.message === 'Success' ? 'default' : 'destructive',
-      duration: 10000,
+      duration: FORM_TOAST_DURATION,
       action:
         error.message === 'Success' ? (
           <ToastAction

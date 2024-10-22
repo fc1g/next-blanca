@@ -1,6 +1,6 @@
 'use server';
 
-import { prisma } from '@/server/db/prisma-client';
+import { prisma } from '@/server/libs/prisma-client';
 import { convertImage } from '@/server/services/convertImageToString';
 
 export const fetchOne = async (id: string) => {

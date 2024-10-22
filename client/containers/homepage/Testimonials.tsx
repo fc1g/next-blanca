@@ -7,6 +7,19 @@ import kuba from '@/public/images/users/kuba.webp';
 import monika from '@/public/images/users/monika.webp';
 import nik from '@/public/images/users/nik.webp';
 import adam from '@/public/images/users/adam.webp';
+import { StaticImageData } from 'next/image';
+
+type TestimonialData = {
+  src: StaticImageData;
+  username: string;
+};
+
+const testimonials: TestimonialData[] = [
+  { src: kuba, username: 'kuba' },
+  { src: monika, username: 'monika' },
+  { src: nik, username: 'nik' },
+  { src: adam, username: 'adam' },
+];
 
 export default function Testimonials() {
   const t = useTranslations('homepage.testimonials');
@@ -16,13 +29,13 @@ export default function Testimonials() {
       <Title title={t('title')} subtitle={t('subtitle')} />
 
       <TestimonialsList>
-        <TestimonialsList.Testimonial src={kuba} username="kuba" />
-
-        <TestimonialsList.Testimonial src={monika} username="monika" />
-
-        <TestimonialsList.Testimonial src={nik} username="nik" />
-
-        <TestimonialsList.Testimonial src={adam} username="adam" />
+        {testimonials.map(({ src, username }) => (
+          <TestimonialsList.Testimonial
+            key={username}
+            src={src}
+            username={username}
+          />
+        ))}
       </TestimonialsList>
 
       <div className="flex items-center justify-center">
