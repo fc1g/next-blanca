@@ -6,10 +6,7 @@ import {
   AccordionTrigger,
 } from '@/client/components/ui/accordion';
 import { useTranslations } from 'next-intl';
-import { MdPhone } from 'react-icons/md';
-import { MdEmail } from 'react-icons/md';
-import { MdOutlineMap } from 'react-icons/md';
-import { MdWeb } from 'react-icons/md';
+import { MdEmail, MdOutlineMap, MdPhone, MdWeb } from 'react-icons/md';
 
 export default function ContactsAccordion() {
   const t = useTranslations('contacts.accordion');
@@ -50,7 +47,7 @@ export default function ContactsAccordion() {
                     </h3>
                     <Anchor
                       className="text-left text-xs text-primary md:text-sm"
-                      href="mailto:Casablanca@gmail.com"
+                      href="mailto:casablancaespaniol@gmail.com"
                     >
                       Casablanca@gmail.com
                     </Anchor>
