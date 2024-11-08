@@ -10,11 +10,11 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/client/components/ui/chart';
-import { format } from 'date-fns';
-import { useLocale } from 'next-intl';
-import { enUS, es, pl } from 'date-fns/locale';
-import { useMemo } from 'react';
 import { getPrice } from '@/client/services/getPrice';
+import { format } from 'date-fns';
+import { enUS, es, pl } from 'date-fns/locale';
+import { useLocale } from 'next-intl';
+import { useMemo } from 'react';
 
 const chartConfig: ChartConfig = {
   price: {
@@ -40,7 +40,7 @@ export default function ContactsChart() {
   }, [lang]);
 
   return (
-    <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
+    <ChartContainer config={chartConfig} className="min-h-11 w-full">
       <BarChart data={chartData} accessibilityLayer>
         <CartesianGrid vertical={false} />
         <ChartTooltip content={<ChartTooltipContent />} />

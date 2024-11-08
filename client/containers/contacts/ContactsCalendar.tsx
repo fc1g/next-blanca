@@ -3,7 +3,7 @@
 import { Calendar } from '@/client/components/ui/calendar';
 import { BookedDate } from '@/client/types/BookedDate';
 import { Locale } from '@/client/types/Locale';
-import { enUS, pl, es } from 'date-fns/locale';
+import { enUS, es, pl } from 'date-fns/locale';
 import { useLocale } from 'next-intl';
 
 const locales = {
@@ -21,9 +21,9 @@ export default function ContactsCalendar({ data }: { data: BookedDate[] }) {
   }));
 
   return (
-    <div className="flex justify-center py-8">
+    <div className="flex justify-center">
       <Calendar
-        className="rounded-xl border"
+        className="h-max rounded-xl border"
         locale={locales[localeActive]}
         selected={bookedDates}
       />
