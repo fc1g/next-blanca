@@ -1,7 +1,7 @@
 'use server';
 
 import { BookedDate } from '@/client/types/BookedDate';
-import { prisma } from "@/server/libs/prisma-client";
+import { prisma } from '@/server/libs/prisma-client';
 import { deleteExpired } from './deleteExpired';
 
 export const fetchManyWithParams = async (

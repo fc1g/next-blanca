@@ -62,6 +62,18 @@ export default function WrappedPageCreate({ t }: WrappedPageCreateProps) {
       className="mx-auto my-12 grid max-w-screen-xl items-end gap-4 px-2 sm:grid-cols-2 md:grid-cols-3 lg:px-6"
     >
       <fieldset>
+        <Label htmlFor="image">{t.image}</Label>
+        <Input
+          id="image"
+          name="image"
+          type="file"
+          accept=".webp"
+          placeholder={t.image}
+          required
+        />
+      </fieldset>
+
+      <fieldset>
         <Label htmlFor="titleEn">{t.title}En</Label>
         <Input
           id="titleEn"

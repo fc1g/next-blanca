@@ -164,7 +164,9 @@ export default JSON.parse(`{
     },
     "placeMoreInfo": "More info",
     "placeGenerateRoute": "Generate route",
-    "placeHouse": "House"
+    "placeHouse": "House",
+    "disable": "Disable",
+    "enable": "Enable"
   },
   "admin": {
     "calendar": {

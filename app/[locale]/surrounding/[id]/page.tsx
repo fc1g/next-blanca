@@ -1,9 +1,12 @@
-import { fetchStaticParams } from '@/server/actions/surrounding/fetchStaticParams';
 import PlaceSkeleton from '@/client/components/skeleton/PlaceSkeleton';
 import WrappedPlace from '@/client/containers/surrounding/WrappedPlace';
 import { Locale } from '@/client/types/Locale';
+import { fetchStaticParams } from '@/server/actions/surrounding/fetchStaticParams';
 import { unstable_setRequestLocale } from 'next-intl/server';
 import { Suspense } from 'react';
+
+export const revalidate = 60;
+export const dynamicParams = true;
 
 export const generateStaticParams = async () => {
   const places = await fetchStaticParams();

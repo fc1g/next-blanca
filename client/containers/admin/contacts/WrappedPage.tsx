@@ -7,8 +7,7 @@ import { Link, usePathname, useRouter } from '@/server/libs/i18n/routing';
 import { useSearchParams } from 'next/navigation';
 import { startTransition, useOptimistic } from 'react';
 import { IoCreateOutline } from 'react-icons/io5';
-import { RiPencilLine } from 'react-icons/ri';
-import { RiDeleteBinLine } from 'react-icons/ri';
+import { RiDeleteBinLine, RiPencilLine } from 'react-icons/ri';
 
 type WrappedPageProps = {
   data: BookedDate[];
@@ -46,6 +45,7 @@ export default function WrappedPage({ data, results, t }: WrappedPageProps) {
 
     await deleteOne(id);
   }
+
   return (
     <section className="mx-auto max-w-screen-xl px-2 lg:px-6">
       <div className="mb-4 flex items-center justify-end">

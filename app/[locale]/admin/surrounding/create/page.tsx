@@ -7,7 +7,7 @@ import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 export default async function page({ params: { locale } }: Params) {
   unstable_setRequestLocale(locale);
   const session = await auth();
-  if (!session) redirect('/');
+  if (!session) redirect('/api/auth/signin');
   const t = await getTranslations();
 
   const translation = {

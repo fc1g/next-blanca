@@ -147,6 +147,8 @@ export type Surrounding = {
   placeMoreInfo: string;
   placeGenerateRoute: string;
   placeHouse: string;
+  enable: string;
+  disable: string;
 };
 
 export type AdminCalendar = {

@@ -1,18 +1,20 @@
 'use client';
 
-import { Button } from '@/client/components/ui/button';
 import Anchor from '@/client/components/Anchor';
 import Title from '@/client/components/Title';
-import Image from 'next/image';
-import { useLocale } from 'next-intl';
-import { SurroundingPlace } from '@/client/types/SurroundingPlace';
+import { Button } from '@/client/components/ui/button';
 import { Locale } from '@/client/types/Locale';
+import { SurroundingPlace } from '@/client/types/SurroundingPlace';
+import { useLocale } from 'next-intl';
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 type PlaceProps = {
   routeText: string;
   houseText: string;
+  enable: string;
+  disable: string;
   place: SurroundingPlace;
 };
 
@@ -23,6 +25,8 @@ const LeafletMap = dynamic(() => import('./LeafMap'), {
 export default function Place({
   routeText,
   houseText,
+  disable,
+  enable,
   place: { title, description, imageAltText, routeLink, coords, image },
 }: PlaceProps) {
   const activeLocale = useLocale() as Locale;
@@ -62,6 +66,8 @@ export default function Place({
           coords={[coords.lat, coords.lng]}
           houseText={houseText}
           title={title[activeLocale]}
+          enable={enable}
+          disable={disable}
         />
       </div>
     </section>

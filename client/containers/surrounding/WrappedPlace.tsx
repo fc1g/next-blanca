@@ -11,6 +11,8 @@ export default async function WrappedPlace({ id }: { id: string }) {
       routeText={t('surrounding.placeGenerateRoute')}
       houseText={t('surrounding.placeHouse')}
       place={place}
+      enable={t('surrounding.enable')}
+      disable={t('surrounding.disable')}
     />
   );
 }

@@ -1,5 +1,6 @@
 import WrappedPageUpdate from '@/client/containers/admin/surrounding/WrappedPageUpdate';
 import { Locale } from '@/client/types/Locale';
+import { fetchMany } from '@/server/actions/surrounding/fetchMany';
 import { fetchOne } from '@/server/actions/surrounding/fetchOne';
 import { auth } from '@/server/libs/auth';
 import { redirect } from '@/server/libs/i18n/routing';
@@ -11,10 +12,21 @@ type PageProps = {
   };
 };
 
+export const revalidate = 60;
+export const dynamicParams = true;
+
+export const generateStaticParams = async () => {
+  const { places } = await fetchMany();
+
+  return places.map(({ id }) => ({
+    id,
+  }));
+};
+
 export default async function page({ params: { id, locale } }: PageProps) {
   unstable_setRequestLocale(locale);
   const session = await auth();
-  if (!session) redirect('/');
+  if (!session) redirect('/api/auth/signin');
   const place = await fetchOne(id);
   const t = await getTranslations();
 

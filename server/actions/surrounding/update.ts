@@ -72,7 +72,7 @@ export const update = async (id: string, formData: FormData) => {
 
   const imageFile = formData.get('image') as File | null;
 
-  if (imageFile && imageFile.size > 0) {
+  if (imageFile && imageFile instanceof File && imageFile.size > 0) {
     const buffer = await imageFile.arrayBuffer();
     const imageBuffer = Buffer.from(buffer);
     imageSchema.parse(imageBuffer);
@@ -163,4 +163,5 @@ export const update = async (id: string, formData: FormData) => {
   }
 
   revalidatePath('/admin/surrounding');
+  revalidatePath(`/surrounding/${id}`);
 };

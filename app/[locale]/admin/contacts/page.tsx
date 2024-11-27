@@ -17,7 +17,7 @@ export default async function page({
 }: PageProps) {
   unstable_setRequestLocale(locale);
   const session = await auth();
-  if (!session) redirect('/');
+  if (!session) redirect('/api/auth/signin');
 
   const { bookedDates, totalResults } = await fetchManyWithParams(
     new URLSearchParams(searchParams)

@@ -24,7 +24,7 @@ export const generateStaticParams = async () => {
 export default async function page({ params: { id, locale } }: PageProps) {
   unstable_setRequestLocale(locale);
   const session = await auth();
-  if (!session) redirect('/');
+  if (!session) redirect('/api/auth/signin');
 
   const bookedDate = await fetchOne(id);
   const t = await getTranslations();
