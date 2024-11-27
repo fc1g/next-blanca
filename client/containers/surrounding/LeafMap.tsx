@@ -36,7 +36,7 @@ export default function LeafMap({
 
   return (
     <MapContainer
-      className="relative mx-auto h-[85vh]"
+      className="relative h-[85vh] w-full"
       dragging={isActive}
       scrollWheelZoom={isActive}
       zoom={14}
