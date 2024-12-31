@@ -1,4 +1,4 @@
-import { Translation } from '@/server/types/Translation';
+import { Translations } from '@/server/types/Translation';
 
 export default JSON.parse(`{
   "header": {
@@ -235,4 +235,4 @@ export default JSON.parse(`{
   }
 }
 
-}`) as Translation;
+}`) as Translations;
