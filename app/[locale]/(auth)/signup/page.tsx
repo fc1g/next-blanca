@@ -11,6 +11,7 @@ import {
   FormMessage,
 } from '@/client/components/ui/form';
 import { Input } from '@/client/components/ui/input';
+import { GLOBAL_API } from '@/client/utils';
 import { Link, useRouter } from '@/server/libs/i18n/routing';
 import { signUpUserSchema } from '@/server/schemas/User';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -33,7 +34,7 @@ export default function Signup() {
   const onSubmit: SubmitHandler<
     z.infer<typeof signUpUserSchema>
   > = async userData => {
-    const res = await fetch(`${process.env.AUTH_URL}/api/auth/login`, {
+    const res = await fetch(GLOBAL_API, {
       headers: {
         'Content-Type': 'application/json',
       },

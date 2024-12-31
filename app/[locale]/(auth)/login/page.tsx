@@ -10,6 +10,7 @@ import {
   FormMessage,
 } from '@/client/components/ui/form';
 import { Input } from '@/client/components/ui/input';
+import { GLOBAL_API } from '@/client/utils';
 import { Link, useRouter } from '@/server/libs/i18n/routing';
 import { loginUserSchema } from '@/server/schemas/User';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -28,10 +29,12 @@ export default function Login() {
     },
   });
 
+  console.log(process.env.AUTH_URL);
+
   const onSubmit: SubmitHandler<
     z.infer<typeof loginUserSchema>
   > = async userData => {
-    const res = await fetch(`${process.env.AUTH_URL}/api/auth/login`, {
+    const res = await fetch(GLOBAL_API, {
       headers: {
         'Content-Type': 'application/json',
       },
