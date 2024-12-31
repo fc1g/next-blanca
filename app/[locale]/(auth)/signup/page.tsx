@@ -33,7 +33,7 @@ export default function Signup() {
   const onSubmit: SubmitHandler<
     z.infer<typeof signUpUserSchema>
   > = async userData => {
-    const res = await fetch('http://localhost:3000/api/auth/signup', {
+    const res = await fetch(`${process.env.AUTH_URL}/api/auth/login`, {
       headers: {
         'Content-Type': 'application/json',
       },

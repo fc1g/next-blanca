@@ -31,7 +31,7 @@ export default function Login() {
   const onSubmit: SubmitHandler<
     z.infer<typeof loginUserSchema>
   > = async userData => {
-    const res = await fetch('http://localhost:3000/api/auth/login', {
+    const res = await fetch(`${process.env.AUTH_URL}/api/auth/login`, {
       headers: {
         'Content-Type': 'application/json',
       },
