@@ -201,5 +201,36 @@
     "reset": "Reset",
     "empty": "Ta lista jest pusta",
     "pity": "Niestety, wystąpił błąd."
+  },
+  "auth": {
+    "email": {
+      "title": "E-mail",
+      "description": "To jest twój adres e-mail"
+    },
+    "password": {
+      "title": "Hasło",
+      "description": "Wprowadź swoje hasło"
+    },
+    "loginBtnText": "Zaloguj się",
+    "signupBtnText": "Zarejestruj się",
+    "submitting": "Wysyłanie",
+    "signup": {
+      "title": "Utwórz konto",
+      "passwordConfirm": {
+        "title": "Potwierdzenie hasła",
+        "description": "Potwierdź swoje hasło"
+      },
+      "login": {
+        "question": "Masz już konto? Zaloguj się tutaj",
+        "linkText": "Zaloguj się tutaj"
+      }
+    },
+    "login": {
+      "title": "Zaloguj się do swojego konta",
+      "signup": {
+        "question": "Nie masz jeszcze konta?",
+        "linkText": "Zarejestruj się"
+      }
+    }
   }
 }

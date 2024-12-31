@@ -1,10 +1,10 @@
-import type { Metadata } from 'next';
-import { Children } from '@/client/types/Children';
-import Providers from '../providers';
 import Footer from '@/client/components/ui/footer/Footer';
-import { routing } from '@/server/libs/i18n/routing';
-import { unstable_setRequestLocale } from 'next-intl/server';
+import { Children } from '@/client/types/Children';
 import { Params } from '@/client/types/Params';
+import { routing } from '@/server/libs/i18n/routing';
+import type { Metadata } from 'next';
+import { setRequestLocale } from 'next-intl/server';
+import Providers from '../providers';
 
 export const metadata: Metadata = {
   title: 'CasaBlanca',
@@ -24,7 +24,7 @@ export default function RootLayout({
   children,
   params: { locale },
 }: Readonly<RootLayoutProps>) {
-  unstable_setRequestLocale(locale);
+  setRequestLocale(locale);
 
   return (
     <html className="h-full" lang={locale} suppressHydrationWarning>

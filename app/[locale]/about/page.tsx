@@ -2,10 +2,10 @@ import Header from '@/client/components/ui/header/Header';
 import Gallery from '@/client/containers/about/Gallery';
 import HouseInformation from '@/client/containers/about/HouseInformation';
 import { Params } from '@/client/types/Params';
-import { unstable_setRequestLocale } from 'next-intl/server';
+import { setRequestLocale } from 'next-intl/server';
 
 export default function AboutPage({ params: { locale } }: Params) {
-  unstable_setRequestLocale(locale);
+  setRequestLocale(locale);
   return (
     <>
       <Header

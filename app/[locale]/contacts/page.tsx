@@ -9,11 +9,11 @@ import ContactsPriceList from '@/client/containers/contacts/ContactsPriceList';
 import WrappedContactsCalendar from '@/client/containers/contacts/WrappedContactsCalendar';
 import { Params } from '@/client/types/Params';
 import { useTranslations } from 'next-intl';
-import { unstable_setRequestLocale } from 'next-intl/server';
+import { setRequestLocale } from 'next-intl/server';
 import { Suspense } from 'react';
 
 export default function ContactsPage({ params: { locale } }: Params) {
-  unstable_setRequestLocale(locale);
+  setRequestLocale(locale);
 
   const t = useTranslations();
 

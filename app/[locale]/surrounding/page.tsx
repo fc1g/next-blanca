@@ -1,12 +1,12 @@
+import ErrorBoundary from '@/client/components/ErrorBoundary';
 import SurroundingPageSkeleton from '@/client/components/skeleton/SurroundingPageSkeleton';
 import Filters from '@/client/containers/surrounding/Filters';
 import WrappedContent from '@/client/containers/surrounding/WrappedContent';
 import { Params } from '@/client/types/Params';
-import { unstable_setRequestLocale } from 'next-intl/server';
+import { useTranslations } from 'next-intl';
+import { setRequestLocale } from 'next-intl/server';
 import { ReadonlyURLSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
-import { useTranslations } from 'next-intl';
-import ErrorBoundary from '@/client/components/ErrorBoundary';
 
 type SurroundingPageProps = {
   searchParams: ReadonlyURLSearchParams;
@@ -16,7 +16,7 @@ export default function SurroundingPage({
   searchParams,
   params: { locale },
 }: SurroundingPageProps) {
-  unstable_setRequestLocale(locale);
+  setRequestLocale(locale);
   const t = useTranslations('surrounding.filtersMenu');
   const params = new URLSearchParams(searchParams);
 

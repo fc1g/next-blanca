@@ -7,6 +7,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  USER
+  ADMIN
+}
+
+model User {
+  id                String    @id @default(auto()) @map("_id") @db.ObjectId
+  email             String    @unique
+  password          String
+  role              Role      @default(USER)
+  createdAt         DateTime  @default(now())
+}
+
 model BookedDate {
   id            String @id @default(auto()) @map("_id") @db.ObjectId
   initialDate   String

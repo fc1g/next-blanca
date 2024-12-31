@@ -2,10 +2,9 @@ import Title from '@/client/components/Title';
 import WrappedPage from '@/client/containers/admin/contacts/WrappedPage';
 import { Params } from '@/client/types/Params';
 import { fetchManyWithParams } from '@/server/actions/bookedDate/fetchManyWithParams';
-import { auth } from '@/server/libs/auth';
 
-import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
-import { ReadonlyURLSearchParams, redirect } from 'next/navigation';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { ReadonlyURLSearchParams } from 'next/navigation';
 
 type PageProps = {
   searchParams: ReadonlyURLSearchParams;
@@ -15,9 +14,7 @@ export default async function page({
   searchParams,
   params: { locale },
 }: PageProps) {
-  unstable_setRequestLocale(locale);
-  const session = await auth();
-  if (!session) redirect('/api/auth/signin');
+  setRequestLocale(locale);
 
   const { bookedDates, totalResults } = await fetchManyWithParams(
     new URLSearchParams(searchParams)
@@ -36,7 +33,7 @@ export default async function page({
     <div className="mt-12">
       <Title
         title={t('admin.calendar.welcome')}
-        subtitle={`${t('admin.calendar.adminGreet')}, ${session?.user?.name}`}
+        subtitle={`${t('admin.calendar.adminGreet')}`}
       />
 
       <WrappedPage data={bookedDates} results={totalResults} t={translate} />

@@ -2,9 +2,7 @@ import WrappedPageUpdate from '@/client/containers/admin/contacts/WrappedPageUpd
 import { Locale } from '@/client/types/Locale';
 import { fetchOne } from '@/server/actions/bookedDate/fetchOne';
 import { fetchStaticParams } from '@/server/actions/bookedDate/fetchStaticParams';
-import { auth } from '@/server/libs/auth';
-import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
-import { redirect } from 'next/navigation';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 type PageProps = {
   params: {
@@ -22,9 +20,7 @@ export const generateStaticParams = async () => {
 };
 
 export default async function page({ params: { id, locale } }: PageProps) {
-  unstable_setRequestLocale(locale);
-  const session = await auth();
-  if (!session) redirect('/api/auth/signin');
+  setRequestLocale(locale);
 
   const bookedDate = await fetchOne(id);
   const t = await getTranslations();

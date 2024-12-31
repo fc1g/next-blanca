@@ -1,16 +1,23 @@
-export type Nav = {
+export type NavTranslations = {
   home: string;
   about: string;
   surrounding: string;
   contacts: string;
 };
 
-export type Header = {
-  nav: Nav;
-  hamburger: string;
+export type LanguageList = {
+  en: string;
+  pl: string;
+  es: string;
 };
 
-export type Hero = {
+export type HeaderTranslations = {
+  nav: NavTranslations;
+  hamburger: string;
+  langList: LanguageList;
+};
+
+export type HeroTranslations = {
   title: {
     firstPart: string;
     vacation: string;
@@ -27,102 +34,83 @@ export type Testimonial = {
   imgAltText: string;
 };
 
-export type Testimonials = {
+export type TestimonialsTranslations = {
   title: string;
   subtitle: string;
   leaveReview: string;
-  kuba: Testimonial;
-  monika: Testimonial;
-  nik: Testimonial;
-  adam: Testimonial;
+  [key: string]: Testimonial | string;
 };
 
-export type Homepage = {
-  hero: Hero;
-  testimonials: Testimonials;
+export type HomepageTranslations = {
+  hero: HeroTranslations;
+  testimonials: TestimonialsTranslations;
 };
 
-export type Gallery = {
-  loungeFromOutside: string;
-  lounge: string;
-  diningRoom: string;
-  kitchen: string;
-  doubleRoom: string;
-  twinRoomDark: string;
-  twinRoomLight: string;
-  bathFirst: string;
-  bathSecond: string;
-  terasaEnter: string;
-  terasa: string;
-  pool: string;
+export type GalleryTranslations = {
+  [key: string]: string;
 };
 
-export type InformationText = {
-  firstPart: string;
-  secondPart?: string;
-};
-
-export type House = {
+export type InformationSection = {
   title: string;
-  text: InformationText;
-};
-
-export type About = {
-  gallery: Gallery;
-  information: {
-    house: House;
-    surrounding: House;
-    rentInfo: House;
-    transfer: House;
+  text: {
+    firstPart: string;
+    secondPart: string;
   };
 };
 
-export type ContactsInformation = {
-  title: string;
-  subtitle: string;
-  firstCol: string;
-  secondCol: string;
-  thirdCol: string;
-  fourthCol: string;
-  fifthCol: string;
-  sixthCol: string;
+export type AboutInformationTranslations = {
+  house: InformationSection;
+  surrounding: InformationSection;
+  rentInfo: InformationSection;
+  transfer: InformationSection;
 };
 
-export type Accordion = {
+export type AboutTranslations = {
+  gallery: GalleryTranslations;
+  information: AboutInformationTranslations;
+};
+
+export type ContactsAccordionSection = {
+  customeField: string;
+  title: string;
+  langPreference: string;
+};
+
+export type ContactsAccordionTranslations = {
   phone: string;
   email: string;
   important: {
     firstPart: string;
     secondPart: string;
   };
-  firstContact: {
-    customeField: string;
-    title: string;
-    langPreference: string;
-  };
-  secondContact: {
-    title: string;
-    customeField: string;
-    langPreference: string;
-  };
+  firstContact: ContactsAccordionSection;
+  secondContact: ContactsAccordionSection;
 };
 
-export type Contacts = {
+export type ContactsTranslations = {
   monthPriceTitle: string;
+  charts: {
+    title: string;
+  };
   months: {
-    october: string;
-    november: string;
-    christmasNewYear: string;
-    march: string;
-    april: string;
+    [key: string]: string;
   };
   fullPrice: string;
   deposit: string;
-  information: ContactsInformation;
-  accordion: Accordion;
+  information: {
+    title: string;
+    subtitle: string;
+    firstCol: string;
+    secondCol: string;
+    thirdCol: string;
+    fourthCol: string;
+    fifthCol: string;
+    sixthCol: string;
+  };
+  accordion: ContactsAccordionTranslations;
 };
 
-export type SurroundingFiltersMenu = {
+export type FiltersMenuTranslations = {
   filters: string;
   sort: string;
   limit: string;
@@ -136,22 +124,22 @@ export type SurroundingFiltersMenu = {
   };
 };
 
-export type Pagination = {
+export type PaginationTranslations = {
   previous: string;
   next: string;
 };
 
-export type Surrounding = {
-  filtersMenu: SurroundingFiltersMenu;
-  pagination: Pagination;
+export type SurroundingTranslations = {
+  filtersMenu: FiltersMenuTranslations;
+  pagination: PaginationTranslations;
   placeMoreInfo: string;
   placeGenerateRoute: string;
   placeHouse: string;
-  enable: string;
   disable: string;
+  enable: string;
 };
 
-export type AdminCalendar = {
+export type AdminCalendarTranslations = {
   welcome: string;
   adminGreet: string;
   from: string;
@@ -160,7 +148,7 @@ export type AdminCalendar = {
   deadlineDate: string;
 };
 
-export type AdminSurrounding = {
+export type AdminSurroundingTranslations = {
   title: string;
   subtitle: string;
   description: string;
@@ -174,36 +162,68 @@ export type AdminSurrounding = {
   };
 };
 
-export type AdminForm = {
+export type AdminFormTranslations = {
   submit: string;
   submitting: string;
 };
 
-export type Admin = {
-  calendar: AdminCalendar;
-  surrounding: AdminSurrounding;
-  form: AdminForm;
+export type AdminTranslations = {
+  calendar: AdminCalendarTranslations;
+  surrounding: AdminSurroundingTranslations;
+  form: AdminFormTranslations;
 };
 
-export type Footer = {
+export type FooterTranslations = {
   copyrights: string;
 };
 
-export type ErrorMessages = {
+export type ErrorTranslations = {
   message: string;
   reset: string;
   empty: string;
-  validation: string;
-  notFound: string;
+  pity: string;
 };
 
-export type Translation = {
-  header: Header;
-  homepage: Homepage;
-  about: About;
-  contacts: Contacts;
-  surrounding: Surrounding;
-  admin: Admin;
-  footer: Footer;
-  error: ErrorMessages;
+export type AuthSectionTranslations = {
+  title: string;
+  description: string;
+};
+
+export type AuthSignupTranslations = {
+  title: string;
+  passwordConfirm: AuthSectionTranslations;
+  login: {
+    question: string;
+    linkText: string;
+  };
+};
+
+export type AuthLoginTranslations = {
+  title: string;
+  signup: {
+    question: string;
+    linkText: string;
+  };
+};
+
+export type AuthTranslations = {
+  email: AuthSectionTranslations;
+  password: AuthSectionTranslations;
+  loginBtnText: string;
+  signupBtnText: string;
+  submitting: string;
+  signup: AuthSignupTranslations;
+  login: AuthLoginTranslations;
+};
+
+export type Translations = {
+  header: HeaderTranslations;
+  homepage: HomepageTranslations;
+  about: AboutTranslations;
+  contacts: ContactsTranslations;
+  surrounding: SurroundingTranslations;
+  admin: AdminTranslations;
+  footer: FooterTranslations;
+  error: ErrorTranslations;
+  auth: AuthTranslations;
 };

@@ -203,5 +203,36 @@ export default JSON.parse(`{
     "reset": "Restablecer",
     "empty": "Esta lista está vacía",
     "pity": "Desafortunadamente, ocurrió un error."
+  },"auth": {
+  "email": {
+    "title": "Correo electrónico",
+    "description": "Esta es tu dirección de correo electrónico"
+  },
+  "password": {
+    "title": "Contraseña",
+    "description": "Ingresa tu contraseña"
+  },
+  "loginBtnText": "Iniciar sesión",
+  "signupBtnText": "Registrarse",
+  "submitting": "Enviando",
+  "signup": {
+    "title": "Crear una cuenta",
+    "passwordConfirm": {
+      "title": "Confirmar contraseña",
+      "description": "Confirma tu contraseña"
+    },
+    "login": {
+      "question": "¿Ya tienes una cuenta? Inicia sesión aquí",
+      "linkText": "Inicia sesión aquí"
+    }
+  },
+  "login": {
+    "title": "Inicia sesión en tu cuenta",
+    "signup": {
+      "question": "¿Aún no tienes una cuenta?",
+      "linkText": "Regístrate"
+    }
   }
+}
+
 }`) as Translation;

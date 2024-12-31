@@ -201,5 +201,36 @@
     "reset": "Reset",
     "empty": "This list is empty",
     "pity": "Unfortunately, an error occurred."
+  },
+  "auth": {
+    "email": {
+      "title": "Email",
+      "description": "This is your email address"
+    },
+    "password": {
+      "title": "Password",
+      "description": "Enter your password"
+    },
+    "loginBtnText": "Sign in",
+    "signupBtnText": "Sign up",
+    "submitting": "Submitting",
+    "signup": {
+      "title": "Create an account",
+      "passwordConfirm": {
+        "title": "PasswordConfirm",
+        "description": "Confirm your password"
+      },
+      "login": {
+        "question": "Already have an account? Login here",
+        "linkText": "Login here"
+      }
+    },
+    "login": {
+      "title": "Sign in to your account",
+      "signup": {
+        "question": "Don't have an account yet?",
+        "linkText": "Sign up"
+      }
+    }
   }
 }
