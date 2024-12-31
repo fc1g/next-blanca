@@ -19,8 +19,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 export default function Login() {
-  const t = useTranslations('auth');
   const router = useRouter();
+  const t = useTranslations('auth');
   const form = useForm<z.infer<typeof loginUserSchema>>({
     resolver: zodResolver(loginUserSchema),
     defaultValues: {
@@ -29,12 +29,10 @@ export default function Login() {
     },
   });
 
-  console.log(process.env.AUTH_URL);
-
   const onSubmit: SubmitHandler<
     z.infer<typeof loginUserSchema>
   > = async userData => {
-    const res = await fetch(GLOBAL_API, {
+    const res = await fetch(`${GLOBAL_API}/api/auth/login`, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -42,14 +40,14 @@ export default function Login() {
       method: 'POST',
     });
 
-    const data = await res.json();
+    const data = (await res.json()) as { status: string; message: string };
 
     if (data.status === 'fail') {
       form.setError('root', { message: data.message });
       return;
     }
 
-    router.back();
+    router.push('/');
   };
 
   return (
@@ -105,7 +103,9 @@ export default function Login() {
             />
 
             {form.formState.errors.root && (
-              <p>{form.formState.errors.root.message}</p>
+              <p className="test-sm font-light text-destructive">
+                {form.formState.errors.root.message}
+              </p>
             )}
 
             <Button

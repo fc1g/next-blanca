@@ -20,8 +20,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 export default function Signup() {
-  const t = useTranslations('auth');
   const router = useRouter();
+  const t = useTranslations('auth');
   const form = useForm<z.infer<typeof signUpUserSchema>>({
     resolver: zodResolver(signUpUserSchema),
     defaultValues: {
@@ -34,7 +34,7 @@ export default function Signup() {
   const onSubmit: SubmitHandler<
     z.infer<typeof signUpUserSchema>
   > = async userData => {
-    const res = await fetch(GLOBAL_API, {
+    const res = await fetch(`${GLOBAL_API}/api/auth/signup`, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -49,7 +49,7 @@ export default function Signup() {
       return;
     }
 
-    router.back();
+    router.push('/');
   };
 
   return (
