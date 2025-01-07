@@ -33,11 +33,13 @@ export async function POST(req: Request) {
       { status: 200 }
     );
 
+    const maxAge = Number(process.env.JWT_TOKEN_EXPIRES_IN);
+
     response.cookies.set('token', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'strict',
-      maxAge: 60 * 60 * 24 * 7,
+      maxAge: 60 * 60 * 24 * maxAge,
       path: '/',
     });
 
