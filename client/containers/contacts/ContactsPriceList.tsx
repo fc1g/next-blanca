@@ -28,7 +28,7 @@ export default function ContactsPriceList() {
           <span className="font-semibold text-secondary-foreground">
             January, February, March:
           </span>{' '}
-          2500 euro — {t('contacts.fullPrice')}
+          2100 euro — {t('contacts.fullPrice')}
         </li>
         <li>
           <span className="col-span-2 font-semibold text-secondary-foreground">
