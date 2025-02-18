@@ -5,7 +5,7 @@ import { routing } from '@/server/libs/i18n/routing';
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import Providers from '../providers';
-import kolaz from './kolaz.jpg';
+import kolaz from '/public/kolaz.jpg';
 
 export const metadata: Metadata = {
   title: 'CasaBlanca',
